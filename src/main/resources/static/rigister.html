@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>User For Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all"/> <!-- Style-CSS -->
+    <link rel="stylesheet" href="css/font-awesome.css"> <!-- Font-Awesome-Icons-CSS -->
+</head>
+<body>
+<div class="center-container">
+    <div class="header-w3l">
+        <h1>Login For You</h1>
+    </div>
+    <!--main-->
+    <div class="main-content-agile">
+        <h2>Get Free Email Updates!<i class="fa mail fa-envelope"></i></h2>
+        <h3>Join us for free to get instant email updates</h3>
+        <div class="sub-main-w3">
+            <form>
+                <div class="field">
+                    <i class="fa"></i>
+                    <input placeholder="Username" name="username" type="text" required="required">
+                </div>
+                <div class="field">
+                    <i class="fa"></i>
+                    <input placeholder="Password" name="password" type="password" required="required">
+                </div>
+                <select name="selectRoleId" id="selectRoleId">
+                    <option value="2" selected>学生</option>
+                    <option value="3">教师</option>
+                </select>
+                <input type="button" value="Rigister" name="rigister">
+            </form>
+        </div>
+    </div>
+    <!--footer-->
+    <div class="footer">
+        <p>&copy; 2018 Access Subscribe Form. All rights reserved | Design by <a
+                href="http://w3layouts.com">W3layouts</a></p>
+    </div>
+    <!--//footer-->
+</div>
+</body>
+<script src="js/jquery-2.1.4.js" type="application/javascript"></script>
+<script>
+    $(function () {
+        $("input[name='rigister']").click(function () {
+            $.ajax({
+                url:"insertUser",
+                type:"post",
+                data:{"username":$("input[name='username']").val(),
+                    "password":$("input[name='password']").val(),
+                "role_id":$("#selectRoleId option:selected").val()},
+                dataType:"json",
+                success:function(ret){
+                    if(ret==1){
+                        alert("注册成功");
+                        location.href="login.html";
+                    }else{
+                        alert("登录失败");
+                        location.href="rigiter.html";
+                    }
+                },error:function(ret){
+                    alert(ret);
+                }
+
+            })
+
+        })
+
+    });
+</script>
+</html>

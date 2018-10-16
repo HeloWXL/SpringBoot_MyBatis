@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>html登录模板</title>
+    <link rel="stylesheet" href="css/backlogin.css" type="text/css" media="all"/> <!-- Style-CSS -->
+</head>
+<body>
+<div class="headtop"></div>
+<div class="login">
+    <h1>Login</h1>
+    <form>
+        <input type="text" name="username" placeholder="用户名" required="required">
+        <input type="password" name="password" placeholder="密  码" required="required">
+        <button type="button" name="login">登录</button>
+    </form>
+</div>
+
+<script src="js/jquery-2.1.4.js" type="application/javascript"></script>
+<script>
+    $(function () {
+        $("button[name='login']").click(function () {
+            $.ajax({
+                url:"backlogin",
+                type:"post",
+                data:{"username":$("input[name='username']").val(),
+                    "password":$("input[name='password']").val()},
+                dataType:"json",
+                success:function(ret){
+                    if(ret!=null){
+                        alert("登录成功");
+                        location.href="index.html"
+                    }else{
+                        alert("登录失败");
+                        location.href="backlogin.html";
+                    }
+                }
+            })
+        })
+
+    });
+</script>
+
+
+</body>
+</html>

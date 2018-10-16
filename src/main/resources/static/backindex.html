@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>未登录</p>
+</body>
+<script src="js/jquery-2.1.4.js" type="application/javascript"></script>
+<script>
+    $(function () {
+        $.ajax({
+            url:"getUserSession",
+            data:{"userBean":"adminSession"},
+            type:"get",
+            dataType:"json",
+            success:function (ret) {
+                alert(ret)
+                if(ret!=null){
+                    $node = $("<p>"+ret.username+"</p>");
+                    $("p").append($node);
+                }else{
+                    alert("请先登录");
+                    location.href="backlogin.html"
+                }
+            }
+        })
+    });
+</script>
+</html>
