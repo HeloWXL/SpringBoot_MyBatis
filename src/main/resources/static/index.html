@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+    <center>
+        <h1>没有登录</h1>
+    </center>
+</body>
+
+<script src="js/jquery-2.1.4.js" type="application/javascript"></script>
+<script>
+    $(function () {
+        $.ajax({
+            url:"getUserSession",
+            data:{"userBean":"userSession"},
+            type:"get",
+            dataType:"json",
+            success:function (ret) {
+                    $node = $("<h2>"+ret.username+"</h2>");
+                    $("center").append($node);
+                    $("h1").hide();
+            }
+        })
+    })
+</script>
+</html>
