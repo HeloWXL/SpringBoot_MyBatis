@@ -14,12 +14,12 @@
 <script>
     $(function () {
         $.ajax({
-            url:"getUserSession",
-            data:{"userBean":"userSession"},
+            url:"student/getStuSession",
+            data:{"studentBean":"studentSession"},
             type:"get",
             dataType:"json",
             success:function (ret) {
-                    $node = $("<h2>"+ret.username+"</h2>");
+                    $node = $("<h2>"+ret.sname+"</h2>");
                     $("center").append($node);
                     $("h1").hide();
             }

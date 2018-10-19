@@ -47,18 +47,17 @@
     $(function () {
         $("input[name='rigister']").click(function () {
             $.ajax({
-                url:"insertUser",
+                url:"student/insertStudent",
                 type:"post",
-                data:{"username":$("input[name='username']").val(),
-                    "password":$("input[name='password']").val(),
-                "role_id":$("#selectRoleId option:selected").val()},
+                data:{"sname":$("input[name='username']").val(),
+                    "spassword":$("input[name='password']").val()},
                 dataType:"json",
                 success:function(ret){
-                    if(ret==1){
+                    if(typeof(ret)!="undefined"){
                         alert("注册成功");
                         location.href="login.html";
                     }else{
-                        alert("登录失败");
+                        alert("注册失败");
                         location.href="rigiter.html";
                     }
                 },error:function(ret){

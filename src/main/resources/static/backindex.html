@@ -3,26 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="layui-v2.4.3/layui/css/layui.css"  media="all">
+    <style>
+        .left{
+
+        }
+        .header{
+            width: 100%;
+            height: 50px;
+            background-color: dodgerblue;
+        }
+        .user{
+            width: 200px;
+            height: 180px;
+            background-color: #ffffff;
+        }
+        .user-info{
+            position: absolute;
+            top: 100px;
+            left: 60px;
+        }
+
+    </style>
 </head>
 <body>
-<p>未登录</p>
+<div class="header"></div>
+<div class="user">
+    <div class="user-info">
+        <img src="images/admin.jpg" width="80px"><br>
+        <h2>Admin</h2>
+    </div>
+</div>
+<div class="left">
+    <ul class="layui-nav layui-nav-tree layui-bg-cyan layui-inline" lay-filter="demo">
+        <li class="layui-nav-item layui-nav-itemed">
+            <a href="javascript:;">学生管理</a>
+        </li>
+        <li class="layui-nav-item">
+            <a href="javascript:;">教师管理</a>
+        </li>
+        <li class="layui-nav-item"><a href="">课程管理</a></li>
+        <li class="layui-nav-item"><a href="">学生成绩管理</a></li>
+    </ul>
+</div>
+
+
+<script src="layui-v2.4.3/layui/layui.js" charset="utf-8"></script>
+<script>
+    layui.use('element', function () {
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+        //监听导航点击
+        element.on('nav(demo)', function (elem) {
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+    });
+</script>
 </body>
 <script src="js/jquery-2.1.4.js" type="application/javascript"></script>
 <script>
     $(function () {
         $.ajax({
-            url:"getUserSession",
-            data:{"userBean":"adminSession"},
-            type:"get",
-            dataType:"json",
-            success:function (ret) {
+            url: "getUserSession",
+            data: {"userBean": "adminSession"},
+            type: "get",
+            dataType: "json",
+            success: function (ret) {
                 alert(ret)
-                if(ret!=null){
-                    $node = $("<p>"+ret.username+"</p>");
+                if (ret != null) {
+                    $node = $("<p>" + ret.username + "</p>");
                     $("p").append($node);
-                }else{
+                } else {
                     alert("请先登录");
-                    location.href="backlogin.html"
+                    location.href = "backlogin.html"
                 }
             }
         })

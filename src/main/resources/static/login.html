@@ -6,6 +6,16 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/style.css" type="text/css" media="all"/> <!-- Style-CSS -->
     <link rel="stylesheet" href="css/font-awesome.css"> <!-- Font-Awesome-Icons-CSS -->
+    <style>
+        .stu{
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+            position: relative;
+            top: 12px;
+            left: 25px;
+        }
+    </style>
 </head>
 <body>
 <div class="center-container">
@@ -17,7 +27,7 @@
         <h2>Get Free Email Updates!<i class="fa mail fa-envelope"></i></h2>
         <h3>Join us for free to get instant email updates</h3>
         <div class="sub-main-w3">
-            <form action="#" method="post">
+            <form   >
                 <div class="field">
                     <i class="fa"></i>
                     <input placeholder="Username" name="username" type="text" required="required">
@@ -28,6 +38,7 @@
                 </div>
                 <input type="button" value="Login" name="login">
             </form>
+            <a href="login.html" class="stu">I am a Teacher</a>
         </div>
     </div>
     <!--footer-->
@@ -43,13 +54,14 @@
     $(function () {
         $("input[name='login']").click(function () {
             $.ajax({
-                url:"login",
+                url:"student/checkLoginStudent",
                 type:"post",
-                data:{"username":$("input[name='username']").val(),
-                    "password":$("input[name='password']").val()},
+                data:{"sname":$("input[name='username']").val(),
+                    "spassword":$("input[name='password']").val()},
                 dataType:"json",
                 success:function(ret){
-                    if(ret!=null){
+                    if(typeof(ret)!="undefined"){
+                        alert("登陆成功")
                         location.href="index.html"
                     }else{
                         alert("登录失败");
