@@ -41,8 +41,8 @@ public class StudentController {
     //学生注册  添加学生 ok
     @PostMapping("insertStudent")
     public JSONObject insertStudent(HttpServletRequest request) {
-        String stuname = request.getParameter("sname");
-        String spassword = request.getParameter("spassword");
+        String stuname = request.getParameter("name");
+        String spassword = request.getParameter("password");
         Integer rid = 3;
         Student student = new Student();
         student.setRid(rid);

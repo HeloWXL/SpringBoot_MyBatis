@@ -1,73 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh">
 <head>
-    <title>User For Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/style.css" type="text/css" media="all"/> <!-- Style-CSS -->
-    <link rel="stylesheet" href="css/font-awesome.css"> <!-- Font-Awesome-Icons-CSS -->
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<style>
+		select#selectUserRole
+		{
+			width                    : 14em;
+			height                   : 45px;
+			padding                  : 0.2em 0.4em 0.2em 0.4em;
+			vertical-align           : middle;
+			border                   : 1px solid #94c1e7;
+			-moz-border-radius       : 0.2em;
+			-webkit-border-radius    : 0.2em;
+			border-radius            : 0.2em;
+			-webkit-appearance       : none;
+			-moz-appearance          : none;
+			appearance               : none;
+			background               : #ffffff;
+			font-family              : SimHei;
+			font-size                : 1.1em;
+			color                    : RGBA(102,102,102,0.7);
+			cursor                   : pointer;
+		}
+	</style>
 </head>
 <body>
-<div class="center-container">
-    <div class="header-w3l">
-        <h1>Login For You</h1>
-    </div>
-    <!--main-->
-    <div class="main-content-agile">
-        <h2>Get Free Email Updates!<i class="fa mail fa-envelope"></i></h2>
-        <h3>Join us for free to get instant email updates</h3>
-        <div class="sub-main-w3">
-            <form>
-                <div class="field">
-                    <i class="fa"></i>
-                    <input placeholder="Username" name="username" type="text" required="required">
-                </div>
-                <div class="field">
-                    <i class="fa"></i>
-                    <input placeholder="Password" name="password" type="password" required="required">
-                </div>
-                <select name="selectRoleId" id="selectRoleId">
-                    <option value="2" selected>学生</option>
-                    <option value="3">教师</option>
-                </select>
-                <input type="button" value="Rigister" name="rigister">
-            </form>
-        </div>
-    </div>
-    <!--footer-->
-    <div class="footer">
-        <p>&copy; 2018 Access Subscribe Form. All rights reserved | Design by <a
-                href="http://w3layouts.com">W3layouts</a></p>
-    </div>
-    <!--//footer-->
+<div class="wrapper">
+	<div class="container">
+		<h1>用户注册</h1>
+		<form class="form">
+			<input type="text" placeholder="用户名" name="name">
+			<input type="password" placeholder="密码" name="password">
+			<select id="selectUserRole" title="Select Travel Destination">
+				<option selected="selected" value="3">学生</option>
+				<option value="2">老师</option>
+			</select><br><br>
+			<button type="button" id="login-button">注册</button>
+		</form>
+	</div>
 </div>
-</body>
-<script src="js/jquery-2.1.4.js" type="application/javascript"></script>
-<script>
-    $(function () {
-        $("input[name='rigister']").click(function () {
-            $.ajax({
-                url:"student/insertStudent",
-                type:"post",
-                data:{"sname":$("input[name='username']").val(),
-                    "spassword":$("input[name='password']").val()},
-                dataType:"json",
-                success:function(ret){
-                    if(typeof(ret)!="undefined"){
-                        alert("注册成功");
-                        location.href="login.html";
-                    }else{
-                        alert("注册失败");
-                        location.href="rigiter.html";
-                    }
-                },error:function(ret){
-                    alert(ret);
-                }
 
-            })
+<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#login-button").click(function () {
+
+			var id = $("#selectUserRole").val();
+			// 学生注册
+			if(id=='3'){
+                $.ajax({
+                    url:"student/insertStudent",
+                    type:"post",
+                    data:{"name":$("input[name='username']").val(),
+                        "password":$("input[name='password']").val()},
+                    dataType:"json",
+                    success:function(ret){
+                        if(typeof(ret)!="undefined"){
+                            location.href="login.html"
+                        }else{
+                            alert("注册失败");
+                            location.href=reload();
+                        }
+                    }
+                })
+			}else{
+                $.ajax({
+                    url:"teacher/checkLoginTeacher",
+                    type:"post",
+                    data:{"name":$("input[name='username']").val(),
+                        "password":$("input[name='password']").val()},
+                    dataType:"json",
+                    success:function(ret){
+                        if(typeof(ret)!="undefined"){
+                            location.href="login.html"
+                        }else{
+                            alert("登录失败,请输入正确的用户名密码");
+                            location.href=reload();
+                        }
+                    }
+                })
+			}
+
+
 
         })
 
     });
 </script>
+
+</body>
 </html>
