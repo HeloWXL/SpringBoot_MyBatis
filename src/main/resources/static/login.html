@@ -6,7 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login</title>
 <link rel="stylesheet" type="text/css" href="css/styles.css">
-	<style>
+<link rel="stylesheet" type="text/css" href="layer/mobile/need/layer.css">
+<style>
 		select#selectUserRole
 		{
 			width                    : 14em;
@@ -31,7 +32,7 @@
 <body>
 <div class="wrapper">
 	<div class="container">
-		<h1>Welcome</h1>
+		<h1>用户登录</h1>
 		<form>
 			<input type="text" placeholder="用户名" name="name">
 			<input type="password" placeholder="密码" name="password">
@@ -45,30 +46,36 @@
 </div>
 
 <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="layer/layer.js"></script>
 <script type="text/javascript">
     $(function () {
+
         $("#login-button").click(function () {
-
-
             var id = $("#selectUserRole").val();
 
             if(id=='3'){
+                // 学生
                 $.ajax({
                     url:"student/checkLoginStudent",
                     type:"post",
-                    data:{"name":$("input[name='name']").val(),
-                        "password":$("input[name='password']").val()},
+                    data:{"sname":$("input[name='name']").val(),
+                        "spassword":$("input[name='password']").val()},
                     dataType:"json",
                     success:function(ret){
                         if(typeof(ret)!="undefined"){
+                            layer.msg("可以的",{time:3000});
                             location.href="index.html"
                         }else{
-                            alert("登录失败,请输入正确的用户名密码");
+                            layer.msg('登录失败，请重新输入用户名密码');
                             location.href=reload();
                         }
+                    },error:function (ret) {
+                        layer.msg('登录失败，请重新输入用户名密码');
+						alert(ret);
                     }
                 })
 			}else{
+                // 教师
                 $.ajax({
                     url:"teacher/checkLoginTeacher",
                     type:"post",
@@ -85,7 +92,6 @@
                     }
                 })
 			}
-
         })
 
     });

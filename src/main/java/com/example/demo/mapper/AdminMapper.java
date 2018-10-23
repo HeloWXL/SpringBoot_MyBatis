@@ -21,6 +21,6 @@ public interface AdminMapper {
     @Select("select * from admin")
     List<Admin> getAlLAdmin();
 
-    @Select("select * from admin where admin_name =#{admin_name} and admin_password =#{admin_password}")
+    @Select("select * from admin where admin_name =#{adminName} and admin_password =#{adminPassword}")
     Admin checkLogin(Admin admin);
 }

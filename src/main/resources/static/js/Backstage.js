@@ -274,30 +274,25 @@ function deleteCaipu() {
     });
 
 }
-// 显示菜谱的信息
+
+
+
 function showCaipu() {
     $.ajax({
-        url: "/showCaipuServlet",
-        type: "post",
-        data: {"num": CurrentCaipuNum},
+        url: "teacher/getAllTeacher",
+        type: "get",
         dataType: "json",
         success: function (ret) {
-            pageSumCai = ret[ret.length-1];
-            for (var i = 0; i < ret.length-1; i++) {
+            for (var i = 0; i < ret.length; i++) {
                 var $node = $('<tr>\n' +
-                    '                        <td><input type="text" value="' + ret[i].c_id + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].c_name + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].c_made + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].c_image + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].c_step + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].c_createtime + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].c_count + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].c_step_image + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].u_id + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].c_introduce + '" style="border: 0px;"></td>\n' +
+                    '                        <td><input type="text" value="' + ret[i].tname + '" style="border: 0px;"></td>\n' +
+                    '                        <td><input type="text" value="' + ret[i].tage + '" style="border: 0px;"></td>\n' +
+                    '                        <td><input type="text" value="' + ret[i].tsex + '" style="border: 0px;"></td>\n' +
+                    '                        <td><input type="text" value="' + ret[i].timage + '" style="border: 0px;"></td>\n' +
+                    '                        <td><input type="text" value="' + ret[i].tintroduce + '" style="border: 0px;"></td>\n' +
+                    '                        <td><input type="text" value="' + ret[i].tmajor + '" style="border: 0px;"></td>\n' +
                     '                        <td>\n' +
-                    '                            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" name="添加菜谱">添加</a>\n' +
-                    '                            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" name="删除菜谱">删除</a>\n' +
+                    '                            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" name="删除动态">删除</a>\n' +
                     '                        </td>\n' +
                     '                    </tr>');
                 $("tbody").append($node);
@@ -327,31 +322,28 @@ function showCaipux(ret) {
         $("tbody").append($node);
     };
 }
-// 显示用户的动态
+
+// 显示教师信息
 function showDynamic() {
     $.ajax({
-        url: "/showDynamicServlet",
-        type: "post",
-        data: {"num": CurrentDynamic},
+        url: "teacher/getAllTeacher",
+        type: "get",
         dataType: "json",
         success: function (ret) {
-            pageSumDynamic = ret[ret.length-1];
-            for (var i = 0; i < ret.length-1; i++) {
+            for (var i = 0; i < ret.length; i++) {
                 var $node = $('<tr>\n' +
-                    '                        <td><input type="text" value="' + ret[i].d_id + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].d_image + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].d_xinde + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].d_createtime + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].u_id + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].c_id + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].d_id + '" style="border: 0px;"></td>\n' +
+                    '                        <td><input type="text" value="' + ret[i].tname + '" style="border: 0px;"></td>\n' +
+                    '                        <td><input type="text" value="' + ret[i].tage + '" style="border: 0px;"></td>\n' +
+                    '                        <td><input type="text" value="' + ret[i].tsex + '" style="border: 0px;"></td>\n' +
+                    '                        <td><input type="text" value="' + ret[i].timage + '" style="border: 0px;"></td>\n' +
+                    '                        <td><input type="text" value="' + ret[i].tintroduce + '" style="border: 0px;"></td>\n' +
+                    '                        <td><input type="text" value="' + ret[i].tmajor + '" style="border: 0px;"></td>\n' +
                     '                        <td>\n' +
                     '                            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" name="删除动态">删除</a>\n' +
                     '                        </td>\n' +
                     '                    </tr>');
                 $("tbody").append($node);
-            }
-            ;
+            };
         }
     });
 }
@@ -426,12 +418,14 @@ function insertUser() {
         });
     });
 }
-// 删除用户信息
+
+
+// 删除学生信息
 function deleteUser() {
     $("tbody").on("click","a[name='删除用户']",function (event) {
         var $id = $(this).closest("tr").children().children().val();
         $.ajax({
-            url: "/deleteUserInfoServlet",
+            url: "student/deleteStudent",
             type: "post",
             data: {"userid": $id},
             dataType: "text",
@@ -446,7 +440,7 @@ function deleteUser() {
         });
     });
 }
-// 显示用户的信息
+// 显示所有学生信息
 function showUser() {
     $.ajax({
         url: "/showAllUserInfoServlet",
@@ -454,25 +448,15 @@ function showUser() {
         data: {"num": CurrentUserNum},
         dataType: "json",
         success: function (ret) {
-            pageSumUser=ret[ret.length-1];
-            for (var i = 0; i < ret.length-1; i++) {
+            for (var i = 0; i < ret.length; i++) {
                 var $node = $('<tr>\n' +
-                    '                        <td><input type="text" value="' + ret[i].u_id + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].u_name + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].u_password + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].u_sex + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].u_birthday + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].u_hometown + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].u_nowlive + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].u_job + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].u_email + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].u_image + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].u_phone + '" style="border: 0px;"></td>\n' +
-                    '                        <td><input type="text" value="' + ret[i].u_introduce + '" style="border: 0px;"></td>\n' +
+                    '                        <td><input type="text" value="' + ret[i].sname + '" style="border: 0px;"></td>\n' +
+                    '                        <td><input type="text" value="' + ret[i].sschool + '" style="border: 0px;"></td>\n' +
+                    '                        <td><input type="text" value="' + ret[i].ssex + '" style="border: 0px;"></td>\n' +
+                    '                        <td><input type="text" value="' + ret[i].sage + '" style="border: 0px;"></td>\n' +
                     '                        <td>\n' +
-                    '                            <a class="layui-btn layui-btn-xs" lay-event="del" name="修改用户">修改</a>\n' +
-                    '                            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" name="删除用户">删除</a>\n' +
-                    '                            <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="del" name="添加用户">添加</a>\n' +
+                    '                            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" name="添加菜谱">添加</a>\n' +
+                    '                            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" name="删除菜谱">删除</a>\n' +
                     '                        </td>\n' +
                     '                    </tr>');
                 $("tbody").append($node);
@@ -480,6 +464,7 @@ function showUser() {
         }
     });
 }
+
 function showUserx(ret) {
     for (var i = 0; i < ret.length; i++) {
         var $node = $('<tr>\n' +
@@ -514,6 +499,8 @@ function showFenYe(){
     $("a[name='Userprev']").show();
     $("a[name='UserNext']").show();
 }
+
+
 // 绘制直方统计图
 function showcharts(xValue,yValue) {
     // / 初始化图表标签

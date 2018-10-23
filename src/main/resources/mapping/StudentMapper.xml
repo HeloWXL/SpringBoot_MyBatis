@@ -25,30 +25,17 @@
     where sid = #{sid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.demo.model.Student" >
-    insert into student (sid, sname, sschool, 
-      ssex, sage, rid, spassword
+    insert into student (sname,
+      rid, spassword
       )
-    values (#{sid,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, #{sschool,jdbcType=VARCHAR}, 
-      #{ssex,jdbcType=VARCHAR}, #{sage,jdbcType=INTEGER}, #{rid,jdbcType=INTEGER}, #{spassword,jdbcType=VARCHAR}
+    values (#{sname,jdbcType=VARCHAR}, #{rid,jdbcType=INTEGER}, #{spassword,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.model.Student" >
     insert into student
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="sid != null" >
-        sid,
-      </if>
       <if test="sname != null" >
         sname,
-      </if>
-      <if test="sschool != null" >
-        sschool,
-      </if>
-      <if test="ssex != null" >
-        ssex,
-      </if>
-      <if test="sage != null" >
-        sage,
       </if>
       <if test="rid != null" >
         rid,
@@ -57,30 +44,10 @@
         spassword,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="sid != null" >
-        #{sid,jdbcType=INTEGER},
-      </if>
-      <if test="sname != null" >
-        #{sname,jdbcType=VARCHAR},
-      </if>
-      <if test="sschool != null" >
-        #{sschool,jdbcType=VARCHAR},
-      </if>
-      <if test="ssex != null" >
-        #{ssex,jdbcType=VARCHAR},
-      </if>
-      <if test="sage != null" >
-        #{sage,jdbcType=INTEGER},
-      </if>
-      <if test="rid != null" >
-        #{rid,jdbcType=INTEGER},
-      </if>
-      <if test="spassword != null" >
-        #{spassword,jdbcType=VARCHAR},
-      </if>
-    </trim>
   </insert>
+
+
+
   <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.Student" >
     update student
     <set >

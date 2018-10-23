@@ -39,7 +39,7 @@ public class StudentController {
     }
 
     //学生注册  添加学生 ok
-    @PostMapping("insertStudent")
+    @RequestMapping(value = "insertStudent")
     public JSONObject insertStudent(HttpServletRequest request) {
         String stuname = request.getParameter("name");
         String spassword = request.getParameter("password");

@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login</title>
+<title>Rigister</title>
 <link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link rel="stylesheet" type="text/css" href="layer/mobile/need/layer.css">
 	<style>
 		select#selectUserRole
 		{
@@ -32,7 +33,7 @@
 <div class="wrapper">
 	<div class="container">
 		<h1>用户注册</h1>
-		<form class="form">
+		<form>
 			<input type="text" placeholder="用户名" name="name">
 			<input type="password" placeholder="密码" name="password">
 			<select id="selectUserRole" title="Select Travel Destination">
@@ -45,6 +46,7 @@
 </div>
 
 <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+<script src="layer/layer.js" type="application/javascript"></script>
 <script type="text/javascript">
     $(function () {
         $("#login-button").click(function () {
@@ -55,11 +57,12 @@
                 $.ajax({
                     url:"student/insertStudent",
                     type:"post",
-                    data:{"name":$("input[name='username']").val(),
+                    data:{"name":$("input[name='name']").val(),
                         "password":$("input[name='password']").val()},
                     dataType:"json",
                     success:function(ret){
                         if(typeof(ret)!="undefined"){
+                            layer.msg("注册成功",{time:3000});
                             location.href="login.html"
                         }else{
                             alert("注册失败");
@@ -71,7 +74,7 @@
                 $.ajax({
                     url:"teacher/checkLoginTeacher",
                     type:"post",
-                    data:{"name":$("input[name='username']").val(),
+                    data:{"name":$("input[name='name']").val(),
                         "password":$("input[name='password']").val()},
                     dataType:"json",
                     success:function(ret){

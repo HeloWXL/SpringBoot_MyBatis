@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Admin;
+import com.example.demo.model.Student;
 import com.example.demo.service.AdminService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -20,28 +21,22 @@ import java.util.List;
  * @date 2018/10/18
  */
 
-@RestController
 @RequestMapping("admin")
+@RestController
 public class AdminController {
-
     @Resource
     private AdminService adminService;
-
-
-
 //    添加一个管理员
     @PostMapping("insertAdmin")
-    public JSONObject insertAdmin(HttpServletRequest request){
+    public int insertAdmin(HttpServletRequest request){
         String name = request.getParameter("name");
         String password = request.getParameter("password");
         Admin admin = new Admin();
         admin.setAdminName(name);
         admin.setAdminPassword(password);
         int i = adminService.insertAdmin(admin);
-        JSONObject jsonObject= JSONObject.fromObject(i);
-        return jsonObject;
+        return i;
     }
-
 //    获得所有的管理员列表
     @GetMapping("getAllAdmin")
     public JSONArray getAllAdmin(){
@@ -53,18 +48,23 @@ public class AdminController {
 //    登录检查以及获取管理员的session
     @PostMapping("checkAdmin")
     public JSONObject checkAdmin(HttpServletRequest request){
-        String name = request.getParameter("name");
+        String name = request.getParameter("username");
         String password = request.getParameter("password");
         Admin admin = new Admin();
         admin.setAdminName(name);
         admin.setAdminPassword(password);
         Admin admin1 = adminService.checkLogin(admin);
-        if(admin1!=null){
-            JSONObject jsonObject= JSONObject.fromObject(admin1);
-            return jsonObject;
-        }else{
-            return null;
-        }
+        request.getSession().setAttribute("adminsession",admin1);
+        JSONObject jsonObject= JSONObject.fromObject(admin1);
+        return jsonObject;
+    }
+//    获取管理员的session
+    @GetMapping("getAdminSession")
+    public JSONObject getAdminSession(HttpServletRequest request){
+        String key = request.getParameter("adminBean");
+        Admin admin = (Admin) request.getSession().getAttribute(key);
+        JSONObject jsonObject = JSONObject.fromObject(admin);
+        return jsonObject;
     }
 
     //根据管理员的ID删除管理员
