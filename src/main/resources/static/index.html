@@ -3,27 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <title>首页</title>
+    <link rel="stylesheet" href="layui-v2.4.3/layui/css/layui.css" type="text/css" media="all"/>
+    <link rel="stylesheet" href="layer/theme/default/layer.css"  media="all" type="text/css">
+    <style>
+        body{
+            background-color: #393D49!important;
+        }
+        #user {
+            float: right;
+        }
+        #test10{
+            margin: 0 auto;
+            width: 900px!important;
+            height: 400px!important;
+        }
+
+        .course-img img{
+            width: 900px;
+            height: 400px;
+        }
+        div p{
+            color: #666666;
+            font-size: 16px;
+        }
+        .course-list{
+            background-color: #ffff;
+            width: 288px;
+            height: 265px;
+            border: 1px solid gray;
+        }
+        .course-list img{
+            margin-left: 50px;
+            margin-top: 20px;
+        }
+        a{
+            color: #000;
+            text-decoration: none;
+        }
+        a:hover{
+            color: yellow;
+        }
+        .course-list-info{
+            margin-left: 21px;
+            margin-top: 5px;
+        }
+        .course{
+            width: 900px;
+            margin: 0 auto;
+        }
+        ul{
+            list-style:none;
+            overflow:hidden;
+        }
+        ul li{
+            float: left;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+        .course-list-info div{
+            margin-top: -8px;
+        }
+        .login{
+            float: left;
+        }
+    </style>
 </head>
 <body>
-    <center>
-        <h1>没有登录</h1>
-    </center>
-</body>
+<div class="header">
+    <!--头部导航栏-->
+    <ul class="layui-nav layui-bg-black">
+        <li class="layui-nav-item layui-this"><a href="index.html">首页</a></li>
+        <li class="layui-nav-item "><a href="">课程</a></li>
+        <li class="layui-nav-item"><a href="">大数据</a></li>
+        <li class="layui-nav-item">
+            <a href="javascript:;">解决方案</a>
+            <dl class="layui-nav-child">
+                <dd><a href="">移动模块</a></dd>
+                <dd><a href="">后台模版</a></dd>
+                <dd><a href="">电商平台</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item"><a href="">社区</a></li>
 
+        <li class="layui-nav-item" id="user">
+            <ul class="layui-nav layui-bg-black">
+                <li class="layui-nav-item">
+                    <a href="">控制台<span class="layui-badge">9</span></a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="">个人中心<span class="layui-badge-dot"></span></a>
+                </li>
+                <li class="layui-nav-item" lay-unselect="">
+                    <a href="login.html" class="login">登录</a>
+                    <a href="rigister.html"class="login">注册</a>
+                    <a href="javascript:;" id="user1"></a>
+                    <dl class="layui-nav-child" id="select">
+                        <dd><a href="javascript:;">修改信息</a></dd>
+                        <dd><a href="javascript:;">用户管理</a></dd>
+                        <dd><a href="javascript:;">退出登录</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+</div>
+<!--轮播图-->
+
+<div class="layui-carousel" id="test10">
+    <div carousel-item="" class="course-img">
+        <div><img src="images/bg.jpg"></div>
+        <div><img src="images/bg.jpg"></div>
+        <div><img src="images/bg.jpg"></div>
+        <div><img src="images/bg.jpg"></div>
+        <div><img src="images/bg.jpg"></div>
+        <div><img src="images/bg.jpg"></div>
+        <div><img src="images/bg.jpg"></div>
+    </div>
+</div>
+
+<div class="course">
+    <ul class="courselist">
+        <li>
+            <div class="course-list">
+                <a href="#"><img src="images/java_image/Java的数据结构与算法精讲（Part%201）.png" width="200px"></a>
+                <div class="course-list-info">
+                    <p>课程名:<a href="#" class="course">java</a></p>
+                    <p>教师:<a href="#" class="teacher">wangxl</a></p>
+                    <div></div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="course-list">
+                <a href="#"><img src="images/java_image/Java的数据结构与算法精讲（Part%201）.png" width="200px"></a>
+                <div class="course-list-info">
+                    <p>课程名:<a href="#" class="course">java</a></p>
+                    <p>教师:<a href="#" class="teacher">wangxl</a></p>
+                    <div></div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="course-list">
+                <a href="#"><img src="images/java_image/Java的数据结构与算法精讲（Part%201）.png" width="200px"></a>
+                <div class="course-list-info">
+                    <p>课程名:<a href="#" class="course">java</a></p>
+                    <p>教师:<a href="#" class="teacher">wangxl</a></p>
+                    <div></div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="course-list">
+                <a href="#"><img src="images/java_image/Java的数据结构与算法精讲（Part%201）.png" width="200px"></a>
+                <div class="course-list-info">
+                    <p>课程名:<a href="#" class="course">java</a></p>
+                    <p>教师:<a href="#" class="teacher">wangxl</a></p>
+                    <div></div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
 <script src="js/jquery-2.1.4.js" type="application/javascript"></script>
+<script src="layui-v2.4.3/layui/layui.js" type="application/javascript"></script>
+<script src="layer/layer.js" type="application/javascript"></script>
+<!--设置页面的加载信息-->
 <script>
     $(function () {
         $.ajax({
-            url:"getUserSession",
-            data:{"userBean":"userSession"},
-            type:"get",
-            dataType:"json",
-            success:function (ret) {
-                    $node = $("<h2>"+ret.username+"</h2>");
-                    $("center").append($node);
-                    $("h1").hide();
+            url: "student/getStuSession",
+            data: {"studentBean": "studentSession"},
+            type: "get",
+            dataType: "json",
+            success: function (ret) {
+                if($.isEmptyObject(ret)){
+                    $('#user1').hide();
+                    $('#select').hide();
+                }else{
+                    layer.msg("登录成功");
+                    $('#user1').show();
+                    $('#select').show();
+                    $('.login').hide();
+                    $node = $('<img src="//t.cn/RCzsdCq" class="layui-nav-img"><i>"'+ret.sname+'"</i>');
+                    $("#user1").html($node);
+                }
             }
         })
+    })
+</script>
+<!--设置轮播图-->
+<script>
+    layui.use(['carousel', 'form'], function () {
+        var carousel = layui.carousel
+            , form = layui.form;
+        //图片轮播
+        carousel.render({
+            elem: '#test10'
+            , width: '100%'
+            , height: '440px'
+            , interval: 3000
+        });
+        //监听开关
+        form.on('switch(autoplay)', function () {
+            ins3.reload({
+                autoplay: this.checked
+            });
+        });
+        $('.demoSet').on('keyup', function () {
+            var value = this.value
+                , options = {};
+            if (!/^\d+$/.test(value)) return;
+
+            options[this.name] = value;
+            ins3.reload(options);
+        });
+
+        //其它示例
+        $('.demoTest .layui-btn').on('click', function () {
+            var othis = $(this), type = othis.data('type');
+            active[type] ? active[type].call(this, othis) : '';
+        });
+    });
+</script>
+
+
+<script>
+    layui.use(['rate'], function() {
+        var rate = layui.rate;
+        // //显示文字
+        // rate.render({
+        //     elem: '#test2'
+        //     ,value: 2 //初始值
+        //     ,text: true //开启文本
+        // });
+
+        //只读
+        rate.render({
+            elem: '.course-list-info div'
+            ,value: 3
+            ,readonly: true
+        });
     })
 </script>
 </html>

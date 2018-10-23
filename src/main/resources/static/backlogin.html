@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>html登录模板</title>
-    <link rel="stylesheet" href="css/backlogin.css" type="text/css" media="all"/> <!-- Style-CSS -->
+    <link rel="stylesheet" href="css/backlogin.css" type="text/css" media="all"/>
+    <link rel="stylesheet" href="layer/theme/default/layer.css"  media="all" type="text/css">
 </head>
 <body>
-<div class="headtop"></div>
 <div class="login">
     <h1>Login</h1>
     <form>
@@ -17,27 +17,27 @@
 </div>
 
 <script src="js/jquery-2.1.4.js" type="application/javascript"></script>
+<script src="layer/layer.js" type="application/javascript"></script>
 <script>
     $(function () {
         $("button[name='login']").click(function () {
             $.ajax({
-                url:"backlogin",
+                url:"admin/checkAdmin",
                 type:"post",
                 data:{"username":$("input[name='username']").val(),
                     "password":$("input[name='password']").val()},
                 dataType:"json",
                 success:function(ret){
-                    if(ret!=null){
-                        alert("登录成功");
-                        location.href="index.html"
+                    if($.isEmptyObject(ret)){
+                        layer.msg('登录失败');
+                        location.reload();
                     }else{
-                        alert("登录失败");
-                        location.href="backlogin.html";
+                        layer.msg('登录成功');
+                        location.href="backindex.html";
                     }
                 }
             })
         })
-
     });
 </script>
 

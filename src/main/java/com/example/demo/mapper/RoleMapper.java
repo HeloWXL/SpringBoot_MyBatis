@@ -1,9 +1,7 @@
 package com.example.demo.mapper;
 
 import com.example.demo.model.Role;
-import org.springframework.stereotype.Component;
 
-@Component
 public interface RoleMapper {
     int deleteByPrimaryKey(Integer roleId);
 
