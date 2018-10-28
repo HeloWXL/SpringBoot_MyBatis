@@ -3,13 +3,13 @@ package com.example.demo.mapper;
 import com.example.demo.model.Score;
 
 public interface ScoreMapper {
-    int deleteByPrimaryKey(Integer scId);
+    int deleteByPrimaryKey(Integer scid);
 
     int insert(Score record);
 
     int insertSelective(Score record);
 
-    Score selectByPrimaryKey(Integer scId);
+    Score selectByPrimaryKey(Integer scid);
 
     int updateByPrimaryKeySelective(Score record);
 

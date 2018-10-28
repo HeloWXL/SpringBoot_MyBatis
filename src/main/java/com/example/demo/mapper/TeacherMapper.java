@@ -18,7 +18,6 @@ public interface TeacherMapper {
 
     int updateByPrimaryKey(Teacher record);
 
-
     @Select("select * from teacher")
     List<Teacher> getAlLTeacher();
 

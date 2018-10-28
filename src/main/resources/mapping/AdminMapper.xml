@@ -1,71 +1,82 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.mapper.AdminMapper">
-  <resultMap id="BaseResultMap" type="com.example.demo.model.Admin">
-    <id column="admin_id" jdbcType="INTEGER" property="adminId" />
-    <result column="admin_name" jdbcType="VARCHAR" property="adminName" />
-    <result column="admin_password" jdbcType="VARCHAR" property="adminPassword" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.AdminMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.model.Admin" >
+    <id column="aid" property="aid" jdbcType="INTEGER" />
+    <result column="aname" property="aname" jdbcType="VARCHAR" />
+    <result column="apassword" property="apassword" jdbcType="VARCHAR" />
+    <result column="rid" property="rid" jdbcType="INTEGER" />
   </resultMap>
-  <sql id="Base_Column_List">
-    admin_id, admin_name, admin_password
+  <sql id="Base_Column_List" >
+    aid, aname, apassword, rid
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from admin
-    where admin_id = #{adminId,jdbcType=INTEGER}
+    where aid = #{aid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from admin
-    where admin_id = #{adminId,jdbcType=INTEGER}
+    where aid = #{aid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.example.demo.model.Admin">
-    insert into admin (admin_id, admin_name, admin_password
-      )
-    values (#{adminId,jdbcType=INTEGER}, #{adminName,jdbcType=VARCHAR}, #{adminPassword,jdbcType=VARCHAR}
-      )
+  <insert id="insert" parameterType="com.example.demo.model.Admin" >
+    insert into admin (aid, aname, apassword, 
+      rid)
+    values (#{aid,jdbcType=INTEGER}, #{aname,jdbcType=VARCHAR}, #{apassword,jdbcType=VARCHAR}, 
+      #{rid,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.demo.model.Admin">
+  <insert id="insertSelective" parameterType="com.example.demo.model.Admin" >
     insert into admin
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="adminId != null">
-        admin_id,
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="aid != null" >
+        aid,
       </if>
-      <if test="adminName != null">
-        admin_name,
+      <if test="aname != null" >
+        aname,
       </if>
-      <if test="adminPassword != null">
-        admin_password,
+      <if test="apassword != null" >
+        apassword,
+      </if>
+      <if test="rid != null" >
+        rid,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="adminId != null">
-        #{adminId,jdbcType=INTEGER},
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="aid != null" >
+        #{aid,jdbcType=INTEGER},
       </if>
-      <if test="adminName != null">
-        #{adminName,jdbcType=VARCHAR},
+      <if test="aname != null" >
+        #{aname,jdbcType=VARCHAR},
       </if>
-      <if test="adminPassword != null">
-        #{adminPassword,jdbcType=VARCHAR},
+      <if test="apassword != null" >
+        #{apassword,jdbcType=VARCHAR},
+      </if>
+      <if test="rid != null" >
+        #{rid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.Admin">
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.Admin" >
     update admin
-    <set>
-      <if test="adminName != null">
-        admin_name = #{adminName,jdbcType=VARCHAR},
+    <set >
+      <if test="aname != null" >
+        aname = #{aname,jdbcType=VARCHAR},
       </if>
-      <if test="adminPassword != null">
-        admin_password = #{adminPassword,jdbcType=VARCHAR},
+      <if test="apassword != null" >
+        apassword = #{apassword,jdbcType=VARCHAR},
+      </if>
+      <if test="rid != null" >
+        rid = #{rid,jdbcType=INTEGER},
       </if>
     </set>
-    where admin_id = #{adminId,jdbcType=INTEGER}
+    where aid = #{aid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.Admin">
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.Admin" >
     update admin
-    set admin_name = #{adminName,jdbcType=VARCHAR},
-      admin_password = #{adminPassword,jdbcType=VARCHAR}
-    where admin_id = #{adminId,jdbcType=INTEGER}
+    set aname = #{aname,jdbcType=VARCHAR},
+      apassword = #{apassword,jdbcType=VARCHAR},
+      rid = #{rid,jdbcType=INTEGER}
+    where aid = #{aid,jdbcType=INTEGER}
   </update>
 </mapper>

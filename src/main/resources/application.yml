@@ -7,7 +7,8 @@ spring:
 mybatis:
   typeAliasesPackage: com.example.demo.model
   mapperLocations: classpath:mapping/*.xml
-
+server:
+  port: 8080
 
 ---
 
@@ -15,7 +16,7 @@ mybatis:
 spring:
   profiles: dev
   datasource:
-    url: jdbc:mysql://localhost:3306/db
+    url: jdbc:mysql://localhost:3306/database
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver

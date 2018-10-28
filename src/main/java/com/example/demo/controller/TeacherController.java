@@ -2,12 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Teacher;
 import com.example.demo.service.TeacherService;
-import javafx.beans.binding.ObjectExpression;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import org.hibernate.validator.constraints.EAN;
-import org.springframework.boot.jackson.JsonObjectDeserializer;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +24,6 @@ public class TeacherController {
     @Resource
     private TeacherService teacherService;
 
-
     //教师注册
     @PostMapping("insertTeacher")
     public JSONObject insertTeacher(HttpServletRequest request){
@@ -43,7 +38,7 @@ public class TeacherController {
         return jsonObject;
     }
 
-    //获取所有的教师
+    //获取所有的教师 ok
     @GetMapping("getAllTeacher")
     public JSONArray selectAllTeacher(){
         List<Teacher> teachers = teacherService.selectAllTeacher();
@@ -51,7 +46,7 @@ public class TeacherController {
         return jsonArray;
     }
 
-    //根据教师的ID删除教师
+    //根据教师的ID删除教师 ok
     @PostMapping("deleteTeahcer")
     public JSONObject deleteTeacher(HttpServletRequest request){
         String id = request.getParameter("id");
@@ -60,7 +55,7 @@ public class TeacherController {
         return jsonObject;
     }
 
-    //登录检查
+    //登录检查 ok
     @PostMapping("checkLoginTeacher")
     public JSONObject checkLoginTeacher(HttpServletRequest request){
         String name = request.getParameter("name");
@@ -81,7 +76,7 @@ public class TeacherController {
         }
     }
 
-    //获取教师的Session
+    //获取教师的Session ok
     @GetMapping("getTeacherSession")
     public JSONObject GetTeacherSession(HttpServletRequest request){
         String key = request.getParameter("teacherBean");
@@ -89,5 +84,16 @@ public class TeacherController {
         JSONObject jsonObject = JSONObject.fromObject(teacher);
         return jsonObject;
     }
+
+//    根据教师的ID查询教师信息
+    @PostMapping("selectTeacherByTid")
+    public JSONObject getTeacherByTid(HttpServletRequest request){
+        String tid = request.getParameter("tid");
+        JSONObject jsonObject = JSONObject.fromObject(teacherService.selectTeacherByTid(Integer.parseInt(tid)));
+        return jsonObject;
+    }
+
+
+
 
 }

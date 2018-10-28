@@ -4,13 +4,14 @@ import com.example.demo.mapper.CourseMapper;
 import com.example.demo.model.Course;
 import com.example.demo.model.Teacher;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 /**
  * @author wangxl
- * @date 2018/10/20
+ * @date 2018/10/28
  */
 @Service
 public class CourseService {
@@ -18,18 +19,21 @@ public class CourseService {
     @Resource
     private CourseMapper courseMapper;
 
-//    获取课程列表
+    public int InsertIntoCourseByTid(Course course, Teacher teacher){
+        return courseMapper.InsertIntoCourseByTid(course,teacher);
+    }
+
+
+    public int deleteByCid(Integer cid){
+        return courseMapper.deleteByPrimaryKey(cid);
+    }
+
     public List<Course> getAllCourse(){
         return courseMapper.getAllCourse();
     }
 
-    //根据课程的Id删除课程
-    public int deleteCourseById(Integer id){
-        return courseMapper.deleteByPrimaryKey(id);
+    public List<Course> getCourseByTid(Teacher teacher){
+        return  courseMapper.getCourseByTid(teacher);
     }
 
-//    根据教师的Id得到教师所教授的课程列表
-    public List<Course> getCourseByTno(Teacher teacher){
-        return courseMapper.getCourseByTno(teacher);
-    }
 }

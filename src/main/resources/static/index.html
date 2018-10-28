@@ -29,7 +29,7 @@
         .course-list{
             background-color: #ffff;
             width: 288px;
-            height: 265px;
+            height: 290px;
             border: 1px solid gray;
         }
         .course-list img{
@@ -67,6 +67,7 @@
             float: left;
         }
     </style>
+    <script src="layer/layer.js"></script>
 </head>
 <body>
 <div class="header">
@@ -91,7 +92,7 @@
                     <a href="">控制台<span class="layui-badge">9</span></a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="">个人中心<span class="layui-badge-dot"></span></a>
+                    <a href="user-info.html">个人中心<span class="layui-badge-dot"></span></a>
                 </li>
                 <li class="layui-nav-item" lay-unselect="">
                     <a href="login.html" class="login">登录</a>
@@ -121,57 +122,29 @@
         <div><img src="images/bg.jpg"></div>
     </div>
 </div>
-
 <div class="course">
     <ul class="courselist">
         <li>
             <div class="course-list">
-                <a href="#"><img src="images/java_image/Java的数据结构与算法精讲（Part%201）.png" width="200px"></a>
+                <a href="#"><img src="images/python_image/Python 3零基础完全入门与提高视频课程.png" width="200px" name="1"></a>
                 <div class="course-list-info">
-                    <p>课程名:<a href="#" class="course">java</a></p>
+                    <p>课程名:<a href="#" class="course" id="1">java</a></p>
                     <p>教师:<a href="#" class="teacher">wangxl</a></p>
                     <div></div>
                 </div>
             </div>
         </li>
-        <li>
-            <div class="course-list">
-                <a href="#"><img src="images/java_image/Java的数据结构与算法精讲（Part%201）.png" width="200px"></a>
-                <div class="course-list-info">
-                    <p>课程名:<a href="#" class="course">java</a></p>
-                    <p>教师:<a href="#" class="teacher">wangxl</a></p>
-                    <div></div>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="course-list">
-                <a href="#"><img src="images/java_image/Java的数据结构与算法精讲（Part%201）.png" width="200px"></a>
-                <div class="course-list-info">
-                    <p>课程名:<a href="#" class="course">java</a></p>
-                    <p>教师:<a href="#" class="teacher">wangxl</a></p>
-                    <div></div>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="course-list">
-                <a href="#"><img src="images/java_image/Java的数据结构与算法精讲（Part%201）.png" width="200px"></a>
-                <div class="course-list-info">
-                    <p>课程名:<a href="#" class="course">java</a></p>
-                    <p>教师:<a href="#" class="teacher">wangxl</a></p>
-                    <div></div>
-                </div>
-            </div>
-        </li>
+
     </ul>
 </div>
+
 <script src="js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="layui-v2.4.3/layui/layui.js" type="application/javascript"></script>
-<script src="layer/layer.js" type="application/javascript"></script>
+
 <!--设置页面的加载信息-->
 <script>
     $(function () {
+        // 获取用户登录信息
         $.ajax({
             url: "student/getStuSession",
             data: {"studentBean": "studentSession"},
@@ -182,15 +155,62 @@
                     $('#user1').hide();
                     $('#select').hide();
                 }else{
-                    layer.msg("登录成功");
                     $('#user1').show();
                     $('#select').show();
                     $('.login').hide();
-                    $node = $('<img src="//t.cn/RCzsdCq" class="layui-nav-img"><i>"'+ret.sname+'"</i>');
+                    $node = $('<img src="//t.cn/RCzsdCq" class="layui-nav-img"><span>'+ret.sname+'</span>');
                     $("#user1").html($node);
                 }
             }
         })
+        // 获取课程列表
+        $.ajax({
+            url:"course/getAllCourseList",
+            type:'get',
+            dataType:'json',
+            async:false,
+            success:function (ret) {
+                if($.isEmptyObject(ret)){
+                    console.log("获取课程列表失败");
+                }else{
+                    for(var i = 0;i<ret.length;i++){
+                        var image = ret[i].cpicture;
+                        var name = ret[i].cname;
+                        var tid = ret[i].tid;
+                        var pingfen = ret[i].cpingfen;
+
+                        $node = $('<li>\n' +
+                            '            <div class="course-list">\n' +
+                            '                <a href="coursedetails.html"><img src="'+image+'" width="200px"></a>\n' +
+                            '                <div class="course-list-info">\n' +
+                            '                    <p>课程名:<a href="coursedetails.html" class="course">'+name+'</a></p>\n' +
+                            '                    <p>教师:<a href="#" class="teacher">'+getTeacherTname(tid)+'</a></p>\n' +
+                            '                    <div></div>\n' +
+                            '                </div>\n' +
+                            '            </div>\n' +
+                            '        </li>')
+
+                        $(".courselist").append($node);
+
+                    }
+                }
+            }
+        })
+        function  getTeacherTname(tid){
+            var tname = "chendingding";
+            $.ajax({
+                url:"teacher/selectTeacherByTid",
+                type:"post",
+                dataType:"json",
+                data:{"tid":tid},
+                async:false,
+                success:function (ret) {
+                   tname = ret.tname;
+                }
+            })
+            return  tname;
+
+        }
     })
 </script>
 <!--设置轮播图-->
@@ -227,18 +247,9 @@
         });
     });
 </script>
-
-
 <script>
     layui.use(['rate'], function() {
         var rate = layui.rate;
-        // //显示文字
-        // rate.render({
-        //     elem: '#test2'
-        //     ,value: 2 //初始值
-        //     ,text: true //开启文本
-        // });
-
         //只读
         rate.render({
             elem: '.course-list-info div'
@@ -247,4 +258,5 @@
         });
     })
 </script>
+</body>
 </html>

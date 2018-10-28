@@ -1,7 +1,7 @@
 package com.example.demo.model;
 
 public class Score {
-    private Integer scId;
+    private Integer scid;
 
     private Integer sid;
 
@@ -9,12 +9,12 @@ public class Score {
 
     private Integer score;
 
-    public Integer getScId() {
-        return scId;
+    public Integer getScid() {
+        return scid;
     }
 
-    public void setScId(Integer scId) {
-        this.scId = scId;
+    public void setScid(Integer scid) {
+        this.scid = scid;
     }
 
     public Integer getSid() {

@@ -3,7 +3,6 @@ package com.example.demo.mapper;
 import com.example.demo.model.Student;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -25,7 +24,6 @@ public interface StudentMapper {
 
     @Select("select * from student where sname =#{sname} and spassword =#{spassword}")
     Student checkLogin(Student stu);
-
 
     @Insert("insert into student(sname,spassword) values(#{sname},##{spassword})")
     int insertStudent(Student student) ;

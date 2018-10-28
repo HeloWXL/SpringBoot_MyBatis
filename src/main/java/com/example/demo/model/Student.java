@@ -5,15 +5,17 @@ public class Student {
 
     private String sname;
 
-    private String sschool;
+    private Integer sage;
 
     private String ssex;
 
-    private Integer sage;
+    private String sschool;
+
+    private String spassword;
 
     private Integer rid;
 
-    private String spassword;
+    private String spic;
 
     public Integer getSid() {
         return sid;
@@ -31,12 +33,12 @@ public class Student {
         this.sname = sname == null ? null : sname.trim();
     }
 
-    public String getSschool() {
-        return sschool;
+    public Integer getSage() {
+        return sage;
     }
 
-    public void setSschool(String sschool) {
-        this.sschool = sschool == null ? null : sschool.trim();
+    public void setSage(Integer sage) {
+        this.sage = sage;
     }
 
     public String getSsex() {
@@ -47,12 +49,20 @@ public class Student {
         this.ssex = ssex == null ? null : ssex.trim();
     }
 
-    public Integer getSage() {
-        return sage;
+    public String getSschool() {
+        return sschool;
     }
 
-    public void setSage(Integer sage) {
-        this.sage = sage;
+    public void setSschool(String sschool) {
+        this.sschool = sschool == null ? null : sschool.trim();
+    }
+
+    public String getSpassword() {
+        return spassword;
+    }
+
+    public void setSpassword(String spassword) {
+        this.spassword = spassword == null ? null : spassword.trim();
     }
 
     public Integer getRid() {
@@ -63,11 +73,11 @@ public class Student {
         this.rid = rid;
     }
 
-    public String getSpassword() {
-        return spassword;
+    public String getSpic() {
+        return spic;
     }
 
-    public void setSpassword(String spassword) {
-        this.spassword = spassword == null ? null : spassword.trim();
+    public void setSpic(String spic) {
+        this.spic = spic == null ? null : spic.trim();
     }
 }

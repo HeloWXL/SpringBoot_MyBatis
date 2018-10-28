@@ -1,23 +1,23 @@
 package com.example.demo.model;
 
 public class Role {
-    private Integer roleId;
+    private Integer rid;
 
-    private String roleName;
+    private String rname;
 
-    public Integer getRoleId() {
-        return roleId;
+    public Integer getRid() {
+        return rid;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public void setRid(Integer rid) {
+        this.rid = rid;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getRname() {
+        return rname;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName == null ? null : roleName.trim();
+    public void setRname(String rname) {
+        this.rname = rname == null ? null : rname.trim();
     }
 }

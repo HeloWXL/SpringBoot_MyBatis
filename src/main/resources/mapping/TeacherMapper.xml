@@ -4,16 +4,14 @@
   <resultMap id="BaseResultMap" type="com.example.demo.model.Teacher">
     <id column="tid" jdbcType="INTEGER" property="tid" />
     <result column="tname" jdbcType="VARCHAR" property="tname" />
+    <result column="tmajor" jdbcType="VARCHAR" property="tmajor" />
     <result column="tage" jdbcType="INTEGER" property="tage" />
     <result column="tsex" jdbcType="VARCHAR" property="tsex" />
-    <result column="timage" jdbcType="VARCHAR" property="timage" />
-    <result column="tintroduce" jdbcType="VARCHAR" property="tintroduce" />
-    <result column="tmajor" jdbcType="VARCHAR" property="tmajor" />
-    <result column="rid" jdbcType="INTEGER" property="rid" />
     <result column="tpassword" jdbcType="VARCHAR" property="tpassword" />
+    <result column="rid" jdbcType="INTEGER" property="rid" />
   </resultMap>
   <sql id="Base_Column_List">
-    tid, tname, tage, tsex, timage, tintroduce, tmajor, rid, tpassword
+    tid, tname, tmajor, tage, tsex, tpassword, rid
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -26,14 +24,12 @@
     where tid = #{tid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.demo.model.Teacher">
-    insert into teacher (tid, tname, tage, 
-      tsex, timage, tintroduce, 
-      tmajor, rid, tpassword
-      )
-    values (#{tid,jdbcType=INTEGER}, #{tname,jdbcType=VARCHAR}, #{tage,jdbcType=INTEGER}, 
-      #{tsex,jdbcType=VARCHAR}, #{timage,jdbcType=VARCHAR}, #{tintroduce,jdbcType=VARCHAR}, 
-      #{tmajor,jdbcType=VARCHAR}, #{rid,jdbcType=INTEGER}, #{tpassword,jdbcType=VARCHAR}
-      )
+    insert into teacher (tid, tname, tmajor, 
+      tage, tsex, tpassword, 
+      rid)
+    values (#{tid,jdbcType=INTEGER}, #{tname,jdbcType=VARCHAR}, #{tmajor,jdbcType=VARCHAR}, 
+      #{tage,jdbcType=INTEGER}, #{tsex,jdbcType=VARCHAR}, #{tpassword,jdbcType=VARCHAR}, 
+      #{rid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.model.Teacher">
     insert into teacher
@@ -44,26 +40,20 @@
       <if test="tname != null">
         tname,
       </if>
+      <if test="tmajor != null">
+        tmajor,
+      </if>
       <if test="tage != null">
         tage,
       </if>
       <if test="tsex != null">
         tsex,
       </if>
-      <if test="timage != null">
-        timage,
-      </if>
-      <if test="tintroduce != null">
-        tintroduce,
-      </if>
-      <if test="tmajor != null">
-        tmajor,
+      <if test="tpassword != null">
+        tpassword,
       </if>
       <if test="rid != null">
         rid,
-      </if>
-      <if test="tpassword != null">
-        tpassword,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -73,26 +63,20 @@
       <if test="tname != null">
         #{tname,jdbcType=VARCHAR},
       </if>
+      <if test="tmajor != null">
+        #{tmajor,jdbcType=VARCHAR},
+      </if>
       <if test="tage != null">
         #{tage,jdbcType=INTEGER},
       </if>
       <if test="tsex != null">
         #{tsex,jdbcType=VARCHAR},
       </if>
-      <if test="timage != null">
-        #{timage,jdbcType=VARCHAR},
-      </if>
-      <if test="tintroduce != null">
-        #{tintroduce,jdbcType=VARCHAR},
-      </if>
-      <if test="tmajor != null">
-        #{tmajor,jdbcType=VARCHAR},
+      <if test="tpassword != null">
+        #{tpassword,jdbcType=VARCHAR},
       </if>
       <if test="rid != null">
         #{rid,jdbcType=INTEGER},
-      </if>
-      <if test="tpassword != null">
-        #{tpassword,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -102,26 +86,20 @@
       <if test="tname != null">
         tname = #{tname,jdbcType=VARCHAR},
       </if>
+      <if test="tmajor != null">
+        tmajor = #{tmajor,jdbcType=VARCHAR},
+      </if>
       <if test="tage != null">
         tage = #{tage,jdbcType=INTEGER},
       </if>
       <if test="tsex != null">
         tsex = #{tsex,jdbcType=VARCHAR},
       </if>
-      <if test="timage != null">
-        timage = #{timage,jdbcType=VARCHAR},
-      </if>
-      <if test="tintroduce != null">
-        tintroduce = #{tintroduce,jdbcType=VARCHAR},
-      </if>
-      <if test="tmajor != null">
-        tmajor = #{tmajor,jdbcType=VARCHAR},
+      <if test="tpassword != null">
+        tpassword = #{tpassword,jdbcType=VARCHAR},
       </if>
       <if test="rid != null">
         rid = #{rid,jdbcType=INTEGER},
-      </if>
-      <if test="tpassword != null">
-        tpassword = #{tpassword,jdbcType=VARCHAR},
       </if>
     </set>
     where tid = #{tid,jdbcType=INTEGER}
@@ -129,13 +107,11 @@
   <update id="updateByPrimaryKey" parameterType="com.example.demo.model.Teacher">
     update teacher
     set tname = #{tname,jdbcType=VARCHAR},
+      tmajor = #{tmajor,jdbcType=VARCHAR},
       tage = #{tage,jdbcType=INTEGER},
       tsex = #{tsex,jdbcType=VARCHAR},
-      timage = #{timage,jdbcType=VARCHAR},
-      tintroduce = #{tintroduce,jdbcType=VARCHAR},
-      tmajor = #{tmajor,jdbcType=VARCHAR},
-      rid = #{rid,jdbcType=INTEGER},
-      tpassword = #{tpassword,jdbcType=VARCHAR}
+      tpassword = #{tpassword,jdbcType=VARCHAR},
+      rid = #{rid,jdbcType=INTEGER}
     where tid = #{tid,jdbcType=INTEGER}
   </update>
 </mapper>

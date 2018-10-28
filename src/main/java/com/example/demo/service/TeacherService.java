@@ -2,11 +2,9 @@ package com.example.demo.service;
 
 import com.example.demo.mapper.TeacherMapper;
 import com.example.demo.model.Teacher;
-import net.sf.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -42,5 +40,10 @@ public class TeacherService {
 //    更新教师信息 获取教师的ID 根据ID更新教师的信息
     public int updateTeahcer(Teacher teacher){
         return teacherMapper.updateByPrimaryKey(teacher);
+    }
+
+
+    public Teacher selectTeacherByTid(Integer tid){
+        return teacherMapper.selectByPrimaryKey(tid);
     }
 }

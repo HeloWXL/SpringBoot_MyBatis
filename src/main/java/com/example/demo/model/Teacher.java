@@ -1,23 +1,20 @@
 package com.example.demo.model;
 
+
 public class Teacher {
     private Integer tid;
 
     private String tname;
 
+    private String tmajor;
+
     private Integer tage;
 
     private String tsex;
 
-    private String timage;
-
-    private String tintroduce;
-
-    private String tmajor;
+    private String tpassword;
 
     private Integer rid;
-
-    private String tpassword;
 
     public Integer getTid() {
         return tid;
@@ -33,6 +30,14 @@ public class Teacher {
 
     public void setTname(String tname) {
         this.tname = tname == null ? null : tname.trim();
+    }
+
+    public String getTmajor() {
+        return tmajor;
+    }
+
+    public void setTmajor(String tmajor) {
+        this.tmajor = tmajor == null ? null : tmajor.trim();
     }
 
     public Integer getTage() {
@@ -51,28 +56,12 @@ public class Teacher {
         this.tsex = tsex == null ? null : tsex.trim();
     }
 
-    public String getTimage() {
-        return timage;
+    public String getTpassword() {
+        return tpassword;
     }
 
-    public void setTimage(String timage) {
-        this.timage = timage == null ? null : timage.trim();
-    }
-
-    public String getTintroduce() {
-        return tintroduce;
-    }
-
-    public void setTintroduce(String tintroduce) {
-        this.tintroduce = tintroduce == null ? null : tintroduce.trim();
-    }
-
-    public String getTmajor() {
-        return tmajor;
-    }
-
-    public void setTmajor(String tmajor) {
-        this.tmajor = tmajor == null ? null : tmajor.trim();
+    public void setTpassword(String tpassword) {
+        this.tpassword = tpassword == null ? null : tpassword.trim();
     }
 
     public Integer getRid() {
@@ -81,13 +70,5 @@ public class Teacher {
 
     public void setRid(Integer rid) {
         this.rid = rid;
-    }
-
-    public String getTpassword() {
-        return tpassword;
-    }
-
-    public void setTpassword(String tpassword) {
-        this.tpassword = tpassword == null ? null : tpassword.trim();
     }
 }
