@@ -1,6 +1,7 @@
 package com.example.demo.mapper;
 
 import com.example.demo.model.Admin;
+import org.apache.ibatis.annotations.Select;
 
 public interface AdminMapper {
     int deleteByPrimaryKey(Integer aid);
@@ -14,4 +15,8 @@ public interface AdminMapper {
     int updateByPrimaryKeySelective(Admin record);
 
     int updateByPrimaryKey(Admin record);
+
+    @Select("select * from admin where aname = #{aname} and apassword = #{apassword}")
+    Admin checkAdminLogin(Admin admin);
+
 }

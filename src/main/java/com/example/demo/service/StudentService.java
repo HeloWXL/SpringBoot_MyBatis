@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.controller.vo.Page;
 import com.example.demo.mapper.StudentMapper;
 import com.example.demo.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,9 @@ public class StudentService {
     private StudentMapper studentMapper;
 
     //获取所有的学生
-    public List<Student> getAllStudent(){
-        return studentMapper.getAlLStudent();
+
+    public List<Student> getAllStudent(Page page){
+        return studentMapper.getAlLStudent(page);
     }
     //根据学生ID查询学生
     public Student getStudentById(Integer id){
@@ -27,7 +29,7 @@ public class StudentService {
     }
     //添加学生
      public int insertStudent(Student student){
-        return studentMapper.insert(student);
+        return studentMapper.insertSelective(student);
      }
 
     //更新学生信息
@@ -44,5 +46,7 @@ public class StudentService {
         return studentMapper.checkLogin(student);
     }
 
-
+    public int getStudentCount(){
+        return studentMapper.getStudentCount();
+    }
 }

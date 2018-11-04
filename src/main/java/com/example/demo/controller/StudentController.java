@@ -1,4 +1,5 @@
 package com.example.demo.controller;
+import com.example.demo.controller.vo.Page;
 import com.example.demo.model.Student;
 import com.example.demo.service.StudentService;
 
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author wangxl
@@ -21,10 +24,19 @@ public class StudentController {
     private StudentService studentService;
 
     //获取所有学生 ok
-    @RequestMapping("getStudent")
-    public JSONArray getStudentList() {
-        List<Student> list = studentService.getAllStudent();
-        JSONArray array = JSONArray.fromObject(list);
+    @PostMapping("getStudent")
+    public JSONArray getStudentList(HttpServletRequest request) {
+        String pageNo = request.getParameter("pageNo");
+        String pageSize = request.getParameter("pageSize");
+        Page page = new Page();
+        page.setPageNo(Integer.parseInt(pageNo));
+        page.setPageSize(Integer.parseInt(pageSize));
+
+        List<Student> list = studentService.getAllStudent(page);
+        Map<String ,Object> map = new HashMap<>();
+        map.put("list",list);
+        map.put("count",studentService.getStudentCount());
+        JSONArray array = JSONArray.fromObject(map);
         return array;
     }
 

@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.controller.vo.Page;
 import com.example.demo.mapper.TeacherMapper;
 import com.example.demo.model.Teacher;
 import org.springframework.stereotype.Service;
@@ -19,12 +20,12 @@ public class TeacherService {
 
 //    教师注册 添加一名教师
     public int insertTreacher(Teacher teacher){
-        return teacherMapper.insert(teacher);
+        return teacherMapper.insertSelective(teacher);
     }
 
 //    显示出所有的教师
-    public List<Teacher> selectAllTeacher(){
-        return teacherMapper.getAlLTeacher();
+    public List<Teacher> selectAllTeacher(Page page){
+        return teacherMapper.getAlLTeacher(page);
     }
 
     //删除教师
@@ -42,8 +43,13 @@ public class TeacherService {
         return teacherMapper.updateByPrimaryKey(teacher);
     }
 
-
+//    通过教师的ID查询教师
     public Teacher selectTeacherByTid(Integer tid){
         return teacherMapper.selectByPrimaryKey(tid);
+    }
+
+//    获得教师总数量
+    public int getTeacherCount(){
+        return teacherMapper.getTeacherCount();
     }
 }

@@ -74,7 +74,7 @@
     <!--头部导航栏-->
     <ul class="layui-nav layui-bg-black">
         <li class="layui-nav-item layui-this"><a href="index.html">首页</a></li>
-        <li class="layui-nav-item "><a href="">课程</a></li>
+        <li class="layui-nav-item "><a href="">课程列表</a></li>
         <li class="layui-nav-item"><a href="">大数据</a></li>
         <li class="layui-nav-item">
             <a href="javascript:;">解决方案</a>
@@ -143,8 +143,9 @@
 
 <!--设置页面的加载信息-->
 <script>
+    // 加载页面内容
     $(function () {
-        // 获取用户登录信息
+        // 获取学生登录信息
         $.ajax({
             url: "student/getStuSession",
             data: {"studentBean": "studentSession"},

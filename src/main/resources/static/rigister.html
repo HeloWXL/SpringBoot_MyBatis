@@ -37,8 +37,8 @@
 			<input type="text" placeholder="用户名" name="name">
 			<input type="password" placeholder="密码" name="password">
 			<select id="selectUserRole" title="Select Travel Destination">
-				<option selected="selected" value="3">学生</option>
-				<option value="2">老师</option>
+				<option selected="selected" value="2">学生</option>
+				<option value="3">老师</option>
 			</select><br><br>
 			<button type="button" id="login-button">注册</button>
 		</form>
@@ -49,11 +49,26 @@
 <script src="layer/layer.js" type="application/javascript"></script>
 <script type="text/javascript">
     $(function () {
+
+        String.prototype.endWith=function(endStr){
+            var d=this.length-endStr.length;
+            return (d>=0&&this.lastIndexOf(endStr)==d);
+        }
+
+        var s = ".jpg"
+
+		var str = "dshjuhu"
+
+		var str1 = "dhuahf.jpg"
+
+		console.log(str.endWith(s))
+		console.log(str1.endWith(s))
+
         $("#login-button").click(function () {
 
 			var id = $("#selectUserRole").val();
 			// 学生注册
-			if(id=='3'){
+			if(id=='2'){
                 $.ajax({
                     url:"student/insertStudent",
                     type:"post",
@@ -61,27 +76,28 @@
                         "password":$("input[name='password']").val()},
                     dataType:"json",
                     success:function(ret){
-                        if(typeof(ret)!="undefined"){
+                        if($.isEmptyObject(ret)){
                             layer.msg("注册成功",{time:3000});
                             location.href="login.html"
                         }else{
-                            alert("注册失败");
+                            layer.msg("注册失败",{time:3000});
                             location.href=reload();
                         }
                     }
                 })
 			}else{
                 $.ajax({
-                    url:"teacher/checkLoginTeacher",
+                    url:"teacher/insertTeacher",
                     type:"post",
                     data:{"name":$("input[name='name']").val(),
                         "password":$("input[name='password']").val()},
                     dataType:"json",
                     success:function(ret){
-                        if(typeof(ret)!="undefined"){
+                        if($.isEmptyObject(ret)){
+                            layer.msg("注册成功",{time:3000});
                             location.href="login.html"
                         }else{
-                            alert("登录失败,请输入正确的用户名密码");
+                            layer.msg("注册失败",{time:3000});
                             location.href=reload();
                         }
                     }

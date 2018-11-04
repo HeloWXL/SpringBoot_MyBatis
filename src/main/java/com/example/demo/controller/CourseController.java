@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.controller.vo.Page;
 import com.example.demo.model.Course;
 import com.example.demo.model.Student;
 import com.example.demo.model.Teacher;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author wangxl
@@ -24,11 +28,8 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("course")
 public class CourseController {
-
-
     @Resource
     private CourseService courseService;
-
 //    老师添加一门课程
     @PostMapping("insertCouseByTid")
     public JSONObject insertCourseByTid(HttpServletRequest request){
@@ -56,16 +57,22 @@ public class CourseController {
         return jsonObject;
     }
 //    获得所有的课程  列表
-    @GetMapping("getAllCourseList")
-    public JSONArray getAllCourseList(){
-        JSONArray jsonArray = JSONArray.fromObject(courseService.getAllCourse());
-        return jsonArray;
-    }
-//    学生添加一门课程
-//    public JSONObject insertIntoCourseBySid(HttpServletRequest request){
-//        Student stu = (Student) request.getSession().getAttribute("studentSession");
-//    }
+    @PostMapping("getAllCourseList")
+    public JSONObject getAllCourseList(HttpServletRequest request){
+        String pageNo= request.getParameter("pageNo");
+        String pageSize = request.getParameter("pageSize");
+        Page page = new Page();
+        page.setPageNo(Integer.parseInt(pageNo));
+        page.setPageSize(Integer.parseInt(pageSize));
 
+        List<Course> courseList = courseService.getAllCourse(page);
+        Map<String,Object> map = new HashMap<>();
+        map.put("list",courseList);
+        map.put("count",courseService.getCourseCount());
+        JSONObject jsonObject = JSONObject.fromObject(map);
+        return jsonObject;
+    }
+//    通过教师的id查询课程
     @PostMapping("getCourseByTid")
     public JSONArray getCourseByTid(HttpServletRequest request){
         String tid = request.getParameter("tid");

@@ -120,6 +120,7 @@ $(function () {
         $("tbody").empty();
         showDynamic();
 
+
     })
     // 上一页
     $("a[name='Userprev']").click(function () {

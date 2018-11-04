@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.controller.vo.Page;
 import com.example.demo.model.Teacher;
 import com.example.demo.service.TeacherService;
 import net.sf.json.JSONArray;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author wangxl
@@ -32,6 +35,7 @@ public class TeacherController {
         Teacher t = new Teacher();
         t.setTpassword(password);
         t.setTname(name);
+        t.setRid(3);
 
         int i = teacherService.insertTreacher(t);
         JSONObject jsonObject = JSONObject.fromObject(i);
@@ -39,11 +43,20 @@ public class TeacherController {
     }
 
     //获取所有的教师 ok
-    @GetMapping("getAllTeacher")
-    public JSONArray selectAllTeacher(){
-        List<Teacher> teachers = teacherService.selectAllTeacher();
-        JSONArray jsonArray = JSONArray.fromObject(teachers);
-        return jsonArray;
+    @PostMapping("getAllTeacher")
+    public JSONObject selectAllTeacher(HttpServletRequest request){
+        String pageNo= request.getParameter("pageNo");
+        String pageSize = request.getParameter("pageSize");
+        Page page = new Page();
+        page.setPageNo(Integer.parseInt(pageNo));
+        page.setPageSize(Integer.parseInt(pageSize));
+
+        List<Teacher> teachers = teacherService.selectAllTeacher(page);
+        Map<String,Object> map = new HashMap<>();
+        map.put("list",teachers);
+        map.put("count",teacherService.getTeacherCount());
+        JSONObject jsonObject = JSONObject.fromObject(map);
+        return jsonObject;
     }
 
     //根据教师的ID删除教师 ok
@@ -85,7 +98,7 @@ public class TeacherController {
         return jsonObject;
     }
 
-//    根据教师的ID查询教师信息
+//    根据教师的ID查询教师信息 ok
     @PostMapping("selectTeacherByTid")
     public JSONObject getTeacherByTid(HttpServletRequest request){
         String tid = request.getParameter("tid");
