@@ -49,4 +49,17 @@ public class StudentService {
     public int getStudentCount(){
         return studentMapper.getStudentCount();
     }
+
+    public Object getScoreAndTeacherBySid(Student student){
+        return studentMapper.getScoreAndTeahcerBySid(student);
+    }
+
+//    根据教师的ID查询学生信息
+    public List<Student> getStudentInfoByTid(int tid){
+        return studentMapper.getStudentInfoByTid(tid);
+    }
+
+    public String getPasssword(String sname){
+        return studentMapper.SelectStudentBySname(sname);
+    }
 }

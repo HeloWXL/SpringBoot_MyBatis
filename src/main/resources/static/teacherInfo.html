@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>教师列表详情</title>
+    <link rel="stylesheet" href="bootstrap-3.3.7/dist/css/bootstrap.css">
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="bootstrap-3.3.7/dist/js/bootstrap.js"></script>
+    <style>
+        #t-info{
+            font-size: 15px;
+            margin-left: 170px;
+        }
+        #t-info img{
+            margin-left: 100px;
+        }
+        #t-info-1{
+            margin-left: 95px;
+            margin-top: 10px;
+        }
+        #t-course{
+            width: 765px;
+        }
+        a{
+            text-decoration: none;
+        }
+        #t-student{
+            width: 765px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <h3 class="text-center text-info">
+                教师
+            </h3>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-2 column">
+            <div class="panel-group" id="panel-483343">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-483343" href="#panel-element-227296">课程信息</a>
+                    </div>
+                    <div id="panel-element-227296" class="panel-collapse collapse">
+                        <div class="panel-body" id="mycourse">
+                            我的课程
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-483343" href="#panel-element-297026">学生信息</a>
+                    </div>
+                    <div id="panel-element-297026" class="panel-collapse collapse">
+                        <div class="panel-body" id="mystudent">
+                           查看学生信息
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a class="panel-title" data-toggle="collapse" data-parent="#panel-721853" href="#panel-element-555328">考试相关</a>
+                    </div>
+                    <div id="panel-element-555328" class="panel-collapse collapse">
+                        <div class="panel-body" id="begintest">
+                            发布考试
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a class="panel-title" data-toggle="collapse" data-parent="#panel-721853" href="#panel-element-228269">学生成绩</a>
+                    </div>
+                    <div id="panel-element-228269" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                           查看考试成绩
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a class="panel-title" data-toggle="collapse" data-parent="#panel-721853" href="#panel-element-66666">试题管理</a>
+                    </div>
+                    <div id="panel-element-66666" class="panel-collapse collapse">
+                        <div class="panel-body" id="add">
+                            添加试题
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 column">
+            <div id="t-course" style="display: none">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            课程
+                        </th>
+                        <th>
+                            课程图片
+                        </th>
+                        <th>
+                            课程创建时间
+                        </th>
+                        <th>
+                            课程介绍
+                        </th>
+                        <th>
+                            课程评分
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div id="t-student" style="display: none;">
+               <table class="table">
+                   <thead>
+                   <tr>
+                       <th>
+                          学生姓名
+                       </th>
+                       <th>
+                           性别
+                       </th>
+                       <th>
+                          专业
+                       </th>
+                       <th>
+                           学校
+                       </th>
+                       <th>
+                           课程
+                       </th>
+                   </tr>
+                   </thead>
+                   <tbody>
+                   <tr>
+                       <td>
+                           1
+                       </td>
+                       <td>
+                           TB - Monthly
+                       </td>
+                       <td>
+                           01/04/2012
+                       </td>
+                       <td>
+                           Default
+                       </td>
+                       <td>
+                           Default
+                       </td>
+                   </tr>
+                   </tbody>
+               </table>
+           </div>
+           <div id="t-test" style="display: none">
+               <table class="table">
+                   <thead>
+                   <tr>
+                       <th>
+                           编号
+                       </th>
+                       <th>
+                           产品
+                       </th>
+                       <th>
+                           交付时间
+                       </th>
+                       <th>
+                           状态
+                       </th>
+                   </tr>
+                   </thead>
+                   <tbody>
+                   <tr>
+                       <td>
+                           1
+                       </td>
+                       <td>
+                           TB - Monthly
+                       </td>
+                       <td>
+                           01/04/2012
+                       </td>
+                       <td>
+                           Default
+                       </td>
+                   </tr>
+                   <tr class="success">
+                       <td>
+                           1
+                       </td>
+                       <td>
+                           TB - Monthly
+                       </td>
+                       <td>
+                           01/04/2012
+                       </td>
+                       <td>
+                           Approved
+                       </td>
+                   </tr>
+                   <tr class="error">
+                       <td>
+                           2
+                       </td>
+                       <td>
+                           TB - Monthly
+                       </td>
+                       <td>
+                           02/04/2012
+                       </td>
+                       <td>
+                           Declined
+                       </td>
+                   </tr>
+                   </tbody>
+               </table>
+           </div>
+            <div id="t-score" style="display: none">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            编号
+                        </th>
+                        <th>
+                            产品
+                        </th>
+                        <th>
+                            交付时间
+                        </th>
+                        <th>
+                            状态
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            TB - Monthly
+                        </td>
+                        <td>
+                            01/04/2012
+                        </td>
+                        <td>
+                            Default
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4 column">
+            <div id="t-info">
+                <img alt="140x140" src="images/c2.jpg" width="140px"/>
+                <dl id="t-info-1">
+                    <dt>
+                        教师姓名:
+                    </dt>
+                    <span>
+                    </span>
+                    <dt>
+                        性别:
+                    </dt>
+                    <span>
+                    </span>
+                    <dt>
+                        年龄:
+                    </dt>
+                    <span>
+                    </span>
+                    <dt>
+                        教师主修课程:
+                    </dt>
+                    <span>
+                    </span>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    $(function () {
+
+        var b = 0;
+        var classArr = new Array("", "success", "error", "warning", "info");
+        var tid;
+        // 加载教师信息
+        $.ajax({
+            url:'teacher/getTeacherSession',
+            dataype:'json',
+            data:{"teacherBean":"teacherSession"},
+            type:'post',
+            success:function (ret) {
+                console.log(ret)
+                tid = ret.tid;
+                $("#t-info img").attr("src",ret.timg)
+                // 教师姓名
+                $("#t-info span:nth-child(2)").html(ret.tname);
+                // 教师性别
+                $("#t-info span:nth-child(4)").html(ret.tsex);
+                // 教师年龄
+                $("#t-info span:nth-child(6)").html(ret.tage);
+                // 教师所教授课程
+                $("#t-info span:nth-child(8)").html(ret.tmajor);
+            }
+        })
+        
+        // 我的课程
+        $("#mycourse").click(function () {
+            $("#t-course").show();
+            $("#t-score").hide();
+            $("#t-student").hide();
+            $("#t-test").hide();
+            $("#t-course tbody").empty();
+            $.ajax({
+                url:'course/getCourseByTid',
+                dataType:'json',
+                type:'post',
+                data:{"tid":tid},
+                success:function (ret) {
+                    for(var i = 0;i<ret.length;i++){
+                        $node =$('<tr class="'+classArr[b++]+'">\n' +
+                            '                        <td>\n' +
+                            '                            '+ret[i].cname+'\n' +
+                            '                        </td>\n' +
+                            '                        <td>\n' +
+                            '                            <img src="'+ret[i].cpicture+'" width="65px">\n' +
+                            '                        </td>\n' +
+                            '                        <td>\n' +
+                            '                            '+ret[i].createtime+'\n' +
+                            '                        </td>\n' +
+                            '                        <td>\n' +
+                            '                            '+ret[i].cintroduce+'\n' +
+                            '                        </td>\n' +
+                            '                        <td>\n' +
+                            '                            '+ret[i].cpingfen+'\n' +
+                            '                        </td>\n' +
+                            '                    </tr>')
+                        $("#t-course tbody").append($node);
+                        if(b==5){
+                            b=0;
+                        }
+                    }
+                }
+            })
+
+        })
+
+        // 我的学生
+        $("#mystudent").click(function () {
+            $("#t-course").hide();
+            $("#t-score").hide();
+            $("#t-student").show();
+            $("#t-test").hide();
+            $("#t-student tbody").empty();
+            $.ajax({
+                url:'teacher/getStudentAndCourse',
+                dataType:'json',
+                type:'post',
+                data:{"tid":tid},
+                success:function (ret) {
+                    console.log(tid);
+                    if($.isEmptyObject(ret)){
+                        console.log("获取我的学生信息失败")
+                    }else{
+                        for(var i = 0;i<ret.course.length;i++){
+
+                            if(ret.student[i].profession==null){
+                                continue;
+                            }else{
+                                $node = $('  <tr class="'+classArr[b++]+'">\n' +
+                                    '                       <td>\n' +
+                                    '                           '+ret.student[i].sname+'\n' +
+                                    '                       </td>\n' +
+                                    '                       <td>\n' +
+                                    '                          '+ret.student[i].ssex+'\n' +
+                                    '                       </td>\n' +
+                                    '                       <td>\n' +
+                                    '                          '+ret.student[i].profession+'\n' +
+                                    '                       </td>\n' +
+                                    '                       <td>\n' +
+                                    '                          '+ret.student[i].sschool+'\n' +
+                                    '                       </td>\n' +
+                                    '                       <td>\n' +
+                                    '                          '+ret.course[i].cname+'\n' +
+                                    '                       </td>\n' +
+                                    '                   </tr>');
+                                $("#t-student tbody").append($node);
+                                if(b==5){
+                                    b=0;
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+        })
+
+
+        //发布考试
+        $("#begintest").click(function () {
+            $("#t-course").hide();
+            $("#t-score").hide();
+            $("#t-student").hide();
+            $("#t-test").show();
+        })
+        $("#add").click(function () {
+            location.href="addExams.html"
+        })
+        
+    })
+</script>
+</html>

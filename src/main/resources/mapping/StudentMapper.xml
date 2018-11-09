@@ -10,9 +10,11 @@
     <result column="spassword" property="spassword" jdbcType="VARCHAR" />
     <result column="rid" property="rid" jdbcType="INTEGER" />
     <result column="spic" property="spic" jdbcType="VARCHAR" />
+    <result column="class_id" property="classId" jdbcType="INTEGER" />
+    <result column="profession" property="profession" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    sid, sname, sage, ssex, sschool, spassword, rid, spic
+    sid, sname, sage, ssex, sschool, spassword, rid, spic, class_id, profession
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -27,10 +29,12 @@
   <insert id="insert" parameterType="com.example.demo.model.Student" >
     insert into student (sid, sname, sage, 
       ssex, sschool, spassword, 
-      rid, spic)
+      rid, spic, class_id, 
+      profession)
     values (#{sid,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, #{sage,jdbcType=INTEGER}, 
       #{ssex,jdbcType=VARCHAR}, #{sschool,jdbcType=VARCHAR}, #{spassword,jdbcType=VARCHAR}, 
-      #{rid,jdbcType=INTEGER}, #{spic,jdbcType=VARCHAR})
+      #{rid,jdbcType=INTEGER}, #{spic,jdbcType=VARCHAR}, #{classId,jdbcType=INTEGER}, 
+      #{profession,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.model.Student" >
     insert into student
@@ -59,6 +63,12 @@
       <if test="spic != null" >
         spic,
       </if>
+      <if test="classId != null" >
+        class_id,
+      </if>
+      <if test="profession != null" >
+        profession,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="sid != null" >
@@ -84,6 +94,12 @@
       </if>
       <if test="spic != null" >
         #{spic,jdbcType=VARCHAR},
+      </if>
+      <if test="classId != null" >
+        #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="profession != null" >
+        #{profession,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -111,6 +127,12 @@
       <if test="spic != null" >
         spic = #{spic,jdbcType=VARCHAR},
       </if>
+      <if test="classId != null" >
+        class_id = #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="profession != null" >
+        profession = #{profession,jdbcType=VARCHAR},
+      </if>
     </set>
     where sid = #{sid,jdbcType=INTEGER}
   </update>
@@ -122,7 +144,9 @@
       sschool = #{sschool,jdbcType=VARCHAR},
       spassword = #{spassword,jdbcType=VARCHAR},
       rid = #{rid,jdbcType=INTEGER},
-      spic = #{spic,jdbcType=VARCHAR}
+      spic = #{spic,jdbcType=VARCHAR},
+      class_id = #{classId,jdbcType=INTEGER},
+      profession = #{profession,jdbcType=VARCHAR}
     where sid = #{sid,jdbcType=INTEGER}
   </update>
 </mapper>

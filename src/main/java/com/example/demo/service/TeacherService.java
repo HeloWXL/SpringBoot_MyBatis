@@ -52,4 +52,15 @@ public class TeacherService {
     public int getTeacherCount(){
         return teacherMapper.getTeacherCount();
     }
+
+
+    public Teacher getTeahceNameBySid(int sid){
+        return teacherMapper.getTeacherBySid(sid);
+    }
+
+
+    public String getPassword(String tname){
+        return teacherMapper.getPassword(tname);
+    }
+
 }

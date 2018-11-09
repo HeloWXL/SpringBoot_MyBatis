@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,12 +77,20 @@ public class CourseController {
     }
 //    通过教师的id查询课程
     @PostMapping("getCourseByTid")
-    public JSONArray getCourseByTid(HttpServletRequest request){
+    public List<Course> getCourseByTid(HttpServletRequest request){
         String tid = request.getParameter("tid");
-        Teacher teacher = new Teacher();
-        teacher.setTid(Integer.parseInt(tid));
-        JSONArray jsonArray = JSONArray.fromObject(courseService.getCourseByTid(teacher));
-        return jsonArray;
+        List<Course>  courseList= courseService.getCourseByTid(Integer.parseInt(tid));
+        return courseList;
+    }
+
+    @GetMapping("getAllCourseList")
+    public List<Course> getAllCourseList(){
+        return courseService.getAllCourseList();
+    }
+
+    @GetMapping("getAllCourse")
+    public List<Course> getAllCourse(){
+        return courseService.getAllCourse();
     }
 }
 

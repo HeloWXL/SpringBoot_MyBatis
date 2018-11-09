@@ -27,11 +27,26 @@ public class CourseService {
     public int deleteByCid(Integer cid){
         return courseMapper.deleteByPrimaryKey(cid);
     }
-    public List<Course> getCourseByTid(Teacher teacher){
-        return  courseMapper.getCourseByTid(teacher);
-    }
     public int getCourseCount(){
         return courseMapper.getCourseCount();
     }
 
+    public List<Course> getCourseByTid(int tid){
+        return courseMapper.getCourseByTid(tid);
+    }
+    public Course getCourseBySid(int sid){
+        return courseMapper.getCourseBySid(sid);
+    }
+
+//     根据教师的ID查询学生信息-1
+    public List<Course> getCourseOrderByTid(int tid){
+        return courseMapper.getCourseByOrderByCnameTid(tid);
+    }
+    public List<Course> getAllCourseList(){
+        return courseMapper.getAllCourseListOrderPingfen();
+    }
+
+    public List<Course> getAllCourse(){
+        return courseMapper.getAllCourseList();
+    }
 }

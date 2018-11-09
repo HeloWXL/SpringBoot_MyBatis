@@ -17,6 +17,10 @@ public class Student {
 
     private String spic;
 
+    private Integer classId;
+
+    private String profession;
+
     public Integer getSid() {
         return sid;
     }
@@ -79,5 +83,21 @@ public class Student {
 
     public void setSpic(String spic) {
         this.spic = spic == null ? null : spic.trim();
+    }
+
+    public Integer getClassId() {
+        return classId;
+    }
+
+    public void setClassId(Integer classId) {
+        this.classId = classId;
+    }
+
+    public String getProfession() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession == null ? null : profession.trim();
     }
 }

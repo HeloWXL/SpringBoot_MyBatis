@@ -59,11 +59,13 @@
                         "spassword":$("input[name='password']").val()},
                     dataType:"json",
                     success:function(ret){
-                        if($.isEmptyObject(ret)){
-                            layer.msg('登录失败，请重新输入用户名密码');
-                            location.href=reload();
-                        }else{
+                        console.log(ret);
+                        if(ret==true){
                             location.href="index.html"
+                        }else{
+                            layer.msg('登录失败，请重新输入用户名密码');
+                            $("input[name='password']").val("");
+                            $("input[name='name']").val("");
                         }
                     }
                 })
@@ -76,11 +78,12 @@
                         "password":$("input[name='password']").val()},
                     dataType:"json",
                     success:function(ret){
-                        if(typeof(ret)!="undefined"){
-                            location.href="teacherindex.html"
+                        if(ret==true){
+                            location.href="teacherinfo.html"
                         }else{
-                            alert("登录失败,请输入正确的用户名密码");
-                            location.href=reload();
+                            layer.msg("登录失败,请输入正确的用户名密码",{time:2000});
+                            $("input[name='name']").val("");
+                            $("input[name='password']").val("");
                         }
                     }
                 })

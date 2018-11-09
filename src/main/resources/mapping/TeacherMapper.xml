@@ -1,117 +1,128 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.mapper.TeacherMapper">
-  <resultMap id="BaseResultMap" type="com.example.demo.model.Teacher">
-    <id column="tid" jdbcType="INTEGER" property="tid" />
-    <result column="tname" jdbcType="VARCHAR" property="tname" />
-    <result column="tmajor" jdbcType="VARCHAR" property="tmajor" />
-    <result column="tage" jdbcType="INTEGER" property="tage" />
-    <result column="tsex" jdbcType="VARCHAR" property="tsex" />
-    <result column="tpassword" jdbcType="VARCHAR" property="tpassword" />
-    <result column="rid" jdbcType="INTEGER" property="rid" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.TeacherMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.model.Teacher" >
+    <id column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="tname" property="tname" jdbcType="VARCHAR" />
+    <result column="tmajor" property="tmajor" jdbcType="VARCHAR" />
+    <result column="tage" property="tage" jdbcType="INTEGER" />
+    <result column="tsex" property="tsex" jdbcType="VARCHAR" />
+    <result column="tpassword" property="tpassword" jdbcType="VARCHAR" />
+    <result column="rid" property="rid" jdbcType="INTEGER" />
+    <result column="timg" property="timg" jdbcType="VARCHAR" />
   </resultMap>
-  <sql id="Base_Column_List">
-    tid, tname, tmajor, tage, tsex, tpassword, rid
+  <sql id="Base_Column_List" >
+    tid, tname, tmajor, tage, tsex, tpassword, rid, timg
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from teacher
     where tid = #{tid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from teacher
     where tid = #{tid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.example.demo.model.Teacher">
+  <insert id="insert" parameterType="com.example.demo.model.Teacher" >
     insert into teacher (tid, tname, tmajor, 
       tage, tsex, tpassword, 
-      rid)
+      rid, timg)
     values (#{tid,jdbcType=INTEGER}, #{tname,jdbcType=VARCHAR}, #{tmajor,jdbcType=VARCHAR}, 
       #{tage,jdbcType=INTEGER}, #{tsex,jdbcType=VARCHAR}, #{tpassword,jdbcType=VARCHAR}, 
-      #{rid,jdbcType=INTEGER})
+      #{rid,jdbcType=INTEGER}, #{timg,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.demo.model.Teacher">
+  <insert id="insertSelective" parameterType="com.example.demo.model.Teacher" >
     insert into teacher
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="tid != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tid != null" >
         tid,
       </if>
-      <if test="tname != null">
+      <if test="tname != null" >
         tname,
       </if>
-      <if test="tmajor != null">
+      <if test="tmajor != null" >
         tmajor,
       </if>
-      <if test="tage != null">
+      <if test="tage != null" >
         tage,
       </if>
-      <if test="tsex != null">
+      <if test="tsex != null" >
         tsex,
       </if>
-      <if test="tpassword != null">
+      <if test="tpassword != null" >
         tpassword,
       </if>
-      <if test="rid != null">
+      <if test="rid != null" >
         rid,
       </if>
+      <if test="timg != null" >
+        timg,
+      </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="tid != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tid != null" >
         #{tid,jdbcType=INTEGER},
       </if>
-      <if test="tname != null">
+      <if test="tname != null" >
         #{tname,jdbcType=VARCHAR},
       </if>
-      <if test="tmajor != null">
+      <if test="tmajor != null" >
         #{tmajor,jdbcType=VARCHAR},
       </if>
-      <if test="tage != null">
+      <if test="tage != null" >
         #{tage,jdbcType=INTEGER},
       </if>
-      <if test="tsex != null">
+      <if test="tsex != null" >
         #{tsex,jdbcType=VARCHAR},
       </if>
-      <if test="tpassword != null">
+      <if test="tpassword != null" >
         #{tpassword,jdbcType=VARCHAR},
       </if>
-      <if test="rid != null">
+      <if test="rid != null" >
         #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="timg != null" >
+        #{timg,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.Teacher">
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.Teacher" >
     update teacher
-    <set>
-      <if test="tname != null">
+    <set >
+      <if test="tname != null" >
         tname = #{tname,jdbcType=VARCHAR},
       </if>
-      <if test="tmajor != null">
+      <if test="tmajor != null" >
         tmajor = #{tmajor,jdbcType=VARCHAR},
       </if>
-      <if test="tage != null">
+      <if test="tage != null" >
         tage = #{tage,jdbcType=INTEGER},
       </if>
-      <if test="tsex != null">
+      <if test="tsex != null" >
         tsex = #{tsex,jdbcType=VARCHAR},
       </if>
-      <if test="tpassword != null">
+      <if test="tpassword != null" >
         tpassword = #{tpassword,jdbcType=VARCHAR},
       </if>
-      <if test="rid != null">
+      <if test="rid != null" >
         rid = #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="timg != null" >
+        timg = #{timg,jdbcType=VARCHAR},
       </if>
     </set>
     where tid = #{tid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.Teacher">
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.Teacher" >
     update teacher
     set tname = #{tname,jdbcType=VARCHAR},
       tmajor = #{tmajor,jdbcType=VARCHAR},
       tage = #{tage,jdbcType=INTEGER},
       tsex = #{tsex,jdbcType=VARCHAR},
       tpassword = #{tpassword,jdbcType=VARCHAR},
-      rid = #{rid,jdbcType=INTEGER}
+      rid = #{rid,jdbcType=INTEGER},
+      timg = #{timg,jdbcType=VARCHAR}
     where tid = #{tid,jdbcType=INTEGER}
   </update>
 </mapper>

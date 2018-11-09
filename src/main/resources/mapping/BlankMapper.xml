@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.BlankMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.model.Blank" >
+    <id column="blank_id" property="blankId" jdbcType="INTEGER" />
+    <result column="blank_name" property="blankName" jdbcType="VARCHAR" />
+    <result column="blank_question" property="blankQuestion" jdbcType="VARCHAR" />
+    <result column="blank_answer" property="blankAnswer" jdbcType="VARCHAR" />
+    <result column="tid" property="tid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    blank_id, blank_name, blank_question, blank_answer, tid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from blank
+    where blank_id = #{blankId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from blank
+    where blank_id = #{blankId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.model.Blank" >
+    insert into blank (blank_name, blank_question,
+      blank_answer, tid)
+    values (#{blankName,jdbcType=VARCHAR}, #{blankQuestion,jdbcType=VARCHAR},
+      #{blankAnswer,jdbcType=VARCHAR}, #{tid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.Blank" >
+    insert into blank
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="blankId != null" >
+        blank_id,
+      </if>
+      <if test="blankName != null" >
+        blank_name,
+      </if>
+      <if test="blankQuestion != null" >
+        blank_question,
+      </if>
+      <if test="blankAnswer != null" >
+        blank_answer,
+      </if>
+      <if test="tid != null" >
+        tid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="blankId != null" >
+        #{blankId,jdbcType=INTEGER},
+      </if>
+      <if test="blankName != null" >
+        #{blankName,jdbcType=VARCHAR},
+      </if>
+      <if test="blankQuestion != null" >
+        #{blankQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="blankAnswer != null" >
+        #{blankAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.Blank" >
+    update blank
+    <set >
+      <if test="blankName != null" >
+        blank_name = #{blankName,jdbcType=VARCHAR},
+      </if>
+      <if test="blankQuestion != null" >
+        blank_question = #{blankQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="blankAnswer != null" >
+        blank_answer = #{blankAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null" >
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where blank_id = #{blankId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.Blank" >
+    update blank
+    set blank_name = #{blankName,jdbcType=VARCHAR},
+      blank_question = #{blankQuestion,jdbcType=VARCHAR},
+      blank_answer = #{blankAnswer,jdbcType=VARCHAR},
+      tid = #{tid,jdbcType=INTEGER}
+    where blank_id = #{blankId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,6 +1,7 @@
 package com.example.demo.mapper;
 
 import com.example.demo.model.Score;
+import org.apache.ibatis.annotations.Select;
 
 public interface ScoreMapper {
     int deleteByPrimaryKey(Integer scid);
@@ -14,4 +15,9 @@ public interface ScoreMapper {
     int updateByPrimaryKeySelective(Score record);
 
     int updateByPrimaryKey(Score record);
+
+    @Select("select score \n" +
+            "from score \n" +
+            "where sid = #{sid}")
+    int getScoreBySid(int sid);
 }

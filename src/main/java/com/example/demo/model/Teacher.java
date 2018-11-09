@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-
 public class Teacher {
     private Integer tid;
 
@@ -15,6 +14,8 @@ public class Teacher {
     private String tpassword;
 
     private Integer rid;
+
+    private String timg;
 
     public Integer getTid() {
         return tid;
@@ -70,5 +71,13 @@ public class Teacher {
 
     public void setRid(Integer rid) {
         this.rid = rid;
+    }
+
+    public String getTimg() {
+        return timg;
+    }
+
+    public void setTimg(String timg) {
+        this.timg = timg == null ? null : timg.trim();
     }
 }

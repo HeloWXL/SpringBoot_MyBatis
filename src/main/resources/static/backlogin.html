@@ -16,7 +16,7 @@
                     "password":$("input[name='password']").val()},
                 dataType:"json",
                 success:function(ret){
-                    if($.isEmptyObject(ret)){
+                    if(ret!=true){
                         layer.msg('登录失败');
                         location.reload();
                     }else{

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.SelectMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.model.Select" >
+    <id column="select_id" property="selectId" jdbcType="INTEGER" />
+    <result column="select_name" property="selectName" jdbcType="VARCHAR" />
+    <result column="select_a" property="selectA" jdbcType="VARCHAR" />
+    <result column="select_b" property="selectB" jdbcType="VARCHAR" />
+    <result column="select_c" property="selectC" jdbcType="VARCHAR" />
+    <result column="select_d" property="selectD" jdbcType="VARCHAR" />
+    <result column="select_answer" property="selectAnswer" jdbcType="VARCHAR" />
+    <result column="tid" property="tid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    select_id, select_name, select_a, select_b, select_c, select_d, select_answer, tid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from select
+    where select_id = #{selectId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from select
+    where select_id = #{selectId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.model.Select" >
+    insert into select ( select_name, select_a,
+      select_b, select_c, select_d, 
+      select_answer, tid)
+    values ( #{selectName,jdbcType=VARCHAR}, #{selectA,jdbcType=VARCHAR},
+      #{selectB,jdbcType=VARCHAR}, #{selectC,jdbcType=VARCHAR}, #{selectD,jdbcType=VARCHAR}, 
+      #{selectAnswer,jdbcType=VARCHAR}, #{tid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.Select" >
+    insert into select
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="selectId != null" >
+        select_id,
+      </if>
+      <if test="selectName != null" >
+        select_name,
+      </if>
+      <if test="selectA != null" >
+        select_a,
+      </if>
+      <if test="selectB != null" >
+        select_b,
+      </if>
+      <if test="selectC != null" >
+        select_c,
+      </if>
+      <if test="selectD != null" >
+        select_d,
+      </if>
+      <if test="selectAnswer != null" >
+        select_answer,
+      </if>
+      <if test="tid != null" >
+        tid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="selectId != null" >
+        #{selectId,jdbcType=INTEGER},
+      </if>
+      <if test="selectName != null" >
+        #{selectName,jdbcType=VARCHAR},
+      </if>
+      <if test="selectA != null" >
+        #{selectA,jdbcType=VARCHAR},
+      </if>
+      <if test="selectB != null" >
+        #{selectB,jdbcType=VARCHAR},
+      </if>
+      <if test="selectC != null" >
+        #{selectC,jdbcType=VARCHAR},
+      </if>
+      <if test="selectD != null" >
+        #{selectD,jdbcType=VARCHAR},
+      </if>
+      <if test="selectAnswer != null" >
+        #{selectAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.Select" >
+    update select
+    <set >
+      <if test="selectName != null" >
+        select_name = #{selectName,jdbcType=VARCHAR},
+      </if>
+      <if test="selectA != null" >
+        select_a = #{selectA,jdbcType=VARCHAR},
+      </if>
+      <if test="selectB != null" >
+        select_b = #{selectB,jdbcType=VARCHAR},
+      </if>
+      <if test="selectC != null" >
+        select_c = #{selectC,jdbcType=VARCHAR},
+      </if>
+      <if test="selectD != null" >
+        select_d = #{selectD,jdbcType=VARCHAR},
+      </if>
+      <if test="selectAnswer != null" >
+        select_answer = #{selectAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null" >
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where select_id = #{selectId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.Select" >
+    update select
+    set select_name = #{selectName,jdbcType=VARCHAR},
+      select_a = #{selectA,jdbcType=VARCHAR},
+      select_b = #{selectB,jdbcType=VARCHAR},
+      select_c = #{selectC,jdbcType=VARCHAR},
+      select_d = #{selectD,jdbcType=VARCHAR},
+      select_answer = #{selectAnswer,jdbcType=VARCHAR},
+      tid = #{tid,jdbcType=INTEGER}
+    where select_id = #{selectId,jdbcType=INTEGER}
+  </update>
+</mapper>

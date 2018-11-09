@@ -86,22 +86,22 @@
                     }
                 })
 			}else{
-                $.ajax({
-                    url:"teacher/insertTeacher",
-                    type:"post",
-                    data:{"name":$("input[name='name']").val(),
-                        "password":$("input[name='password']").val()},
-                    dataType:"json",
-                    success:function(ret){
-                        if($.isEmptyObject(ret)){
-                            layer.msg("注册成功",{time:3000});
-                            location.href="login.html"
-                        }else{
-                            layer.msg("注册失败",{time:3000});
-                            location.href=reload();
-                        }
-                    }
-                })
+					$.ajax({
+						url:"teacher/insertTeacher",
+						type:"post",
+						data:{"name":$("input[name='name']").val(),
+							"password":$("input[name='password']").val()},
+						dataType:"json",
+						success:function(ret){
+							if($.isEmptyObject(ret)){
+								layer.msg("注册成功",{time:3000});
+								location.href="login.html"
+							}else{
+								layer.msg("注册失败",{time:3000});
+								location.href=reload();
+							}
+						}
+					})
 			}
 
 

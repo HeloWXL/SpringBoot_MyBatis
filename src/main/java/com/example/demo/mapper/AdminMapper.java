@@ -1,6 +1,7 @@
 package com.example.demo.mapper;
 
 import com.example.demo.model.Admin;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 public interface AdminMapper {
@@ -16,7 +17,13 @@ public interface AdminMapper {
 
     int updateByPrimaryKey(Admin record);
 
-    @Select("select * from admin where aname = #{aname} and apassword = #{apassword}")
+    @Select("select * from admin where aname = #{aname}")
     Admin checkAdminLogin(Admin admin);
+
+    @Select("select apassword from admin where aname = #{aname}")
+    String getPassword(String aname);
+
+    @Insert("insert into admin (aname,apassword) values (#{aname},#{apassword})")
+    int insertAdmin(Admin admin);
 
 }
