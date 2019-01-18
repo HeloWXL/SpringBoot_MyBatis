@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -15,21 +16,22 @@ import java.util.List;
  */
 @Service("studentService")
 public class StudentService {
-    @Autowired
+    @Resource
     private StudentMapper studentMapper;
 
     //获取所有的学生
-
     public List<Student> getAllStudent(Page page){
         return studentMapper.getAlLStudent(page);
     }
+
     //根据学生ID查询学生
     public Student getStudentById(Integer id){
         return studentMapper.selectByPrimaryKey(id);
     }
+
     //添加学生
      public int insertStudent(Student student){
-        return studentMapper.insertSelective(student);
+        return studentMapper.insertStudent(student);
      }
 
     //更新学生信息
@@ -42,8 +44,8 @@ public class StudentService {
     }
 
     //登录检查
-    public Student checkLogin(Student student){
-        return studentMapper.checkLogin(student);
+    public Student checkLogin(String name){
+        return studentMapper.checkLogin(name);
     }
 
     public int getStudentCount(){
@@ -54,12 +56,11 @@ public class StudentService {
         return studentMapper.getScoreAndTeahcerBySid(student);
     }
 
+
+
 //    根据教师的ID查询学生信息
     public List<Student> getStudentInfoByTid(int tid){
         return studentMapper.getStudentInfoByTid(tid);
     }
 
-    public String getPasssword(String sname){
-        return studentMapper.SelectStudentBySname(sname);
-    }
 }

@@ -1,83 +1,83 @@
 package com.example.demo.model;
 
 public class Teacher {
-    private Integer tid;
+    private Integer teacherId;
 
-    private String tname;
+    private String teacherName;
 
-    private String tmajor;
+    private String teacherMajor;
 
-    private Integer tage;
+    private Integer teacherAge;
 
-    private String tsex;
+    private String teacherSex;
 
-    private String tpassword;
+    private String teacherPassword;
 
-    private Integer rid;
+    private String teacherPicture;
 
-    private String timg;
+    private Integer classId;
 
-    public Integer getTid() {
-        return tid;
+    public Integer getTeacherId() {
+        return teacherId;
     }
 
-    public void setTid(Integer tid) {
-        this.tid = tid;
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
     }
 
-    public String getTname() {
-        return tname;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public void setTname(String tname) {
-        this.tname = tname == null ? null : tname.trim();
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName == null ? null : teacherName.trim();
     }
 
-    public String getTmajor() {
-        return tmajor;
+    public String getTeacherMajor() {
+        return teacherMajor;
     }
 
-    public void setTmajor(String tmajor) {
-        this.tmajor = tmajor == null ? null : tmajor.trim();
+    public void setTeacherMajor(String teacherMajor) {
+        this.teacherMajor = teacherMajor == null ? null : teacherMajor.trim();
     }
 
-    public Integer getTage() {
-        return tage;
+    public Integer getTeacherAge() {
+        return teacherAge;
     }
 
-    public void setTage(Integer tage) {
-        this.tage = tage;
+    public void setTeacherAge(Integer teacherAge) {
+        this.teacherAge = teacherAge;
     }
 
-    public String getTsex() {
-        return tsex;
+    public String getTeacherSex() {
+        return teacherSex;
     }
 
-    public void setTsex(String tsex) {
-        this.tsex = tsex == null ? null : tsex.trim();
+    public void setTeacherSex(String teacherSex) {
+        this.teacherSex = teacherSex == null ? null : teacherSex.trim();
     }
 
-    public String getTpassword() {
-        return tpassword;
+    public String getTeacherPassword() {
+        return teacherPassword;
     }
 
-    public void setTpassword(String tpassword) {
-        this.tpassword = tpassword == null ? null : tpassword.trim();
+    public void setTeacherPassword(String teacherPassword) {
+        this.teacherPassword = teacherPassword == null ? null : teacherPassword.trim();
     }
 
-    public Integer getRid() {
-        return rid;
+    public String getTeacherPicture() {
+        return teacherPicture;
     }
 
-    public void setRid(Integer rid) {
-        this.rid = rid;
+    public void setTeacherPicture(String teacherPicture) {
+        this.teacherPicture = teacherPicture == null ? null : teacherPicture.trim();
     }
 
-    public String getTimg() {
-        return timg;
+    public Integer getClassId() {
+        return classId;
     }
 
-    public void setTimg(String timg) {
-        this.timg = timg == null ? null : timg.trim();
+    public void setClassId(Integer classId) {
+        this.classId = classId;
     }
 }

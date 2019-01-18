@@ -2,127 +2,154 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.demo.mapper.CourseMapper" >
   <resultMap id="BaseResultMap" type="com.example.demo.model.Course" >
-    <id column="cid" property="cid" jdbcType="INTEGER" />
-    <result column="cname" property="cname" jdbcType="VARCHAR" />
-    <result column="cpicture" property="cpicture" jdbcType="VARCHAR" />
-    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
-    <result column="tid" property="tid" jdbcType="INTEGER" />
-    <result column="cintroduce" property="cintroduce" jdbcType="VARCHAR" />
-    <result column="cpingfen" property="cpingfen" jdbcType="INTEGER" />
-    <result column="cvideo" property="cvideo" jdbcType="VARCHAR" />
+    <id column="course_id" property="courseId" jdbcType="INTEGER" />
+    <result column="course_name" property="courseName" jdbcType="VARCHAR" />
+    <result column="course_picture" property="coursePicture" jdbcType="VARCHAR" />
+    <result column="course_video" property="courseVideo" jdbcType="VARCHAR" />
+    <result column="course_pingfen" property="coursePingfen" jdbcType="VARCHAR" />
+    <result column="teacher_id" property="teacherId" jdbcType="INTEGER" />
+    <result column="course_introduce" property="courseIntroduce" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    cid, cname, cpicture, createtime, tid, cintroduce, cpingfen, cvideo
+    course_id, course_name, course_picture, course_video, course_pingfen, teacher_id, course_introduce
   </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from course
-    where cid = #{cid,jdbcType=INTEGER}
+    where course_id = #{courseId,jdbcType=INTEGER}
   </select>
+
+
+  <select id="getAllCourse" resultMap="BaseResultMap" parameterType="com.example.demo.controller.vo.Page" >
+    select
+    <include refid="Base_Column_List" />
+    from course
+    limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+  </select>
+
+  <select id="getAllCourseListOrderPingfen" resultMap="BaseResultMap">
+   select
+    <include refid="Base_Column_List" />
+   from course
+   order by course_pingfen ASC
+    limit 1,20
+  </select>
+
+
+  <select id="getCourseBySid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select c.course_name,c.course_introduce,c.course_picture,c.course_video,c.course_pingfen
+   from student s ,course c,score sc
+   where s.student_id=sc.student_id and sc.course_id =c.course_id and s.student_id=#{sid}
+  </select>
+
+  <select id="getCourseByTid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select *
+    from course c ,teacher t
+    where c.teacher_id = t.teacher_id and t.teacher_id = #{tid}
+  </select>
+
+  <select id="getCourseBySid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select c.course_name,c.course_introduce,c.course_picture ,c.course_id
+    from teacher t ,student s ,course c ,score sc
+    where t.teacher_id = c.teacher_id and sc.course_id=c.course_id
+    and score.student_id = s.student_id and s.student_id=#{sid}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from course
-    where cid = #{cid,jdbcType=INTEGER}
+    where course_id = #{courseId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.demo.model.Course" >
-    insert into course (cid, cname, cpicture, 
-      createtime, tid, cintroduce, 
-      cpingfen, cvideo)
-    values (#{cid,jdbcType=INTEGER}, #{cname,jdbcType=VARCHAR}, #{cpicture,jdbcType=VARCHAR}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{tid,jdbcType=INTEGER}, #{cintroduce,jdbcType=VARCHAR}, 
-      #{cpingfen,jdbcType=INTEGER}, #{cvideo,jdbcType=VARCHAR})
+    insert into course (course_id, course_name, course_picture, 
+      course_video, course_pingfen, tid, 
+      course_introduce)
+    values (#{courseId,jdbcType=INTEGER}, #{courseName,jdbcType=VARCHAR}, #{coursePicture,jdbcType=VARCHAR}, 
+      #{courseVideo,jdbcType=VARCHAR}, #{coursePingfen,jdbcType=VARCHAR}, #{tid,jdbcType=INTEGER}, 
+      #{courseIntroduce,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.model.Course" >
     insert into course
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="cid != null" >
-        cid,
+      <if test="courseId != null" >
+        course_id,
       </if>
-      <if test="cname != null" >
-        cname,
+      <if test="courseName != null" >
+        course_name,
       </if>
-      <if test="cpicture != null" >
-        cpicture,
+      <if test="coursePicture != null" >
+        course_picture,
       </if>
-      <if test="createtime != null" >
-        createtime,
+      <if test="courseVideo != null" >
+        course_video,
+      </if>
+      <if test="coursePingfen != null" >
+        course_pingfen,
       </if>
       <if test="tid != null" >
         tid,
       </if>
-      <if test="cintroduce != null" >
-        cintroduce,
-      </if>
-      <if test="cpingfen != null" >
-        cpingfen,
-      </if>
-      <if test="cvideo != null" >
-        cvideo,
+      <if test="courseIntroduce != null" >
+        course_introduce,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="cid != null" >
-        #{cid,jdbcType=INTEGER},
+      <if test="courseId != null" >
+        #{courseId,jdbcType=INTEGER},
       </if>
-      <if test="cname != null" >
-        #{cname,jdbcType=VARCHAR},
+      <if test="courseName != null" >
+        #{courseName,jdbcType=VARCHAR},
       </if>
-      <if test="cpicture != null" >
-        #{cpicture,jdbcType=VARCHAR},
+      <if test="coursePicture != null" >
+        #{coursePicture,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
+      <if test="courseVideo != null" >
+        #{courseVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="coursePingfen != null" >
+        #{coursePingfen,jdbcType=VARCHAR},
       </if>
       <if test="tid != null" >
         #{tid,jdbcType=INTEGER},
       </if>
-      <if test="cintroduce != null" >
-        #{cintroduce,jdbcType=VARCHAR},
-      </if>
-      <if test="cpingfen != null" >
-        #{cpingfen,jdbcType=INTEGER},
-      </if>
-      <if test="cvideo != null" >
-        #{cvideo,jdbcType=VARCHAR},
+      <if test="courseIntroduce != null" >
+        #{courseIntroduce,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.Course" >
     update course
     <set >
-      <if test="cname != null" >
-        cname = #{cname,jdbcType=VARCHAR},
+      <if test="courseName != null" >
+        course_name = #{courseName,jdbcType=VARCHAR},
       </if>
-      <if test="cpicture != null" >
-        cpicture = #{cpicture,jdbcType=VARCHAR},
+      <if test="coursePicture != null" >
+        course_picture = #{coursePicture,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null" >
-        createtime = #{createtime,jdbcType=TIMESTAMP},
+      <if test="courseVideo != null" >
+        course_video = #{courseVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="coursePingfen != null" >
+        course_pingfen = #{coursePingfen,jdbcType=VARCHAR},
       </if>
       <if test="tid != null" >
         tid = #{tid,jdbcType=INTEGER},
       </if>
-      <if test="cintroduce != null" >
-        cintroduce = #{cintroduce,jdbcType=VARCHAR},
-      </if>
-      <if test="cpingfen != null" >
-        cpingfen = #{cpingfen,jdbcType=INTEGER},
-      </if>
-      <if test="cvideo != null" >
-        cvideo = #{cvideo,jdbcType=VARCHAR},
+      <if test="courseIntroduce != null" >
+        course_introduce = #{courseIntroduce,jdbcType=VARCHAR},
       </if>
     </set>
-    where cid = #{cid,jdbcType=INTEGER}
+    where course_id = #{courseId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.demo.model.Course" >
     update course
-    set cname = #{cname,jdbcType=VARCHAR},
-      cpicture = #{cpicture,jdbcType=VARCHAR},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
+    set course_name = #{courseName,jdbcType=VARCHAR},
+      course_picture = #{coursePicture,jdbcType=VARCHAR},
+      course_video = #{courseVideo,jdbcType=VARCHAR},
+      course_pingfen = #{coursePingfen,jdbcType=VARCHAR},
       tid = #{tid,jdbcType=INTEGER},
-      cintroduce = #{cintroduce,jdbcType=VARCHAR},
-      cpingfen = #{cpingfen,jdbcType=INTEGER},
-      cvideo = #{cvideo,jdbcType=VARCHAR}
-    where cid = #{cid,jdbcType=INTEGER}
+      course_introduce = #{courseIntroduce,jdbcType=VARCHAR}
+    where course_id = #{courseId,jdbcType=INTEGER}
   </update>
 </mapper>

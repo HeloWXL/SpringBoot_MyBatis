@@ -1,43 +1,33 @@
 package com.example.demo.model;
 
 public class Admin {
-    private Integer aid;
+    private Integer adminId;
 
-    private String aname;
+    private String adminName;
 
-    private String apassword;
+    private String adminPassword;
 
-    private Integer rid;
-
-    public Integer getAid() {
-        return aid;
+    public Integer getAdminId() {
+        return adminId;
     }
 
-    public void setAid(Integer aid) {
-        this.aid = aid;
+    public void setAdminId(Integer adminId) {
+        this.adminId = adminId;
     }
 
-    public String getAname() {
-        return aname;
+    public String getAdminName() {
+        return adminName;
     }
 
-    public void setAname(String aname) {
-        this.aname = aname == null ? null : aname.trim();
+    public void setAdminName(String adminName) {
+        this.adminName = adminName == null ? null : adminName.trim();
     }
 
-    public String getApassword() {
-        return apassword;
+    public String getAdminPassword() {
+        return adminPassword;
     }
 
-    public void setApassword(String apassword) {
-        this.apassword = apassword == null ? null : apassword.trim();
-    }
-
-    public Integer getRid() {
-        return rid;
-    }
-
-    public void setRid(Integer rid) {
-        this.rid = rid;
+    public void setAdminPassword(String adminPassword) {
+        this.adminPassword = adminPassword == null ? null : adminPassword.trim();
     }
 }

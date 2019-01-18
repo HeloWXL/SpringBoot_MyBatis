@@ -1,88 +1,88 @@
 package com.example.demo.model;
 
 public class Student {
-    private Integer sid;
+    private Integer studentId;
 
-    private String sname;
+    private Integer studentSno;
 
-    private Integer sage;
+    private String studentName;
 
-    private String ssex;
+    private String studentPassword;
 
-    private String sschool;
+    private Integer studentAge;
 
-    private String spassword;
+    private String studentSex;
 
-    private Integer rid;
+    private String studentPicture;
 
-    private String spic;
+    private String studentProfession;
 
     private Integer classId;
 
-    private String profession;
+    private String studentSchool;
 
-    public Integer getSid() {
-        return sid;
+    public Integer getStudentId() {
+        return studentId;
     }
 
-    public void setSid(Integer sid) {
-        this.sid = sid;
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
     }
 
-    public String getSname() {
-        return sname;
+    public Integer getStudentSno() {
+        return studentSno;
     }
 
-    public void setSname(String sname) {
-        this.sname = sname == null ? null : sname.trim();
+    public void setStudentSno(Integer studentSno) {
+        this.studentSno = studentSno;
     }
 
-    public Integer getSage() {
-        return sage;
+    public String getStudentName() {
+        return studentName;
     }
 
-    public void setSage(Integer sage) {
-        this.sage = sage;
+    public void setStudentName(String studentName) {
+        this.studentName = studentName == null ? null : studentName.trim();
     }
 
-    public String getSsex() {
-        return ssex;
+    public String getStudentPassword() {
+        return studentPassword;
     }
 
-    public void setSsex(String ssex) {
-        this.ssex = ssex == null ? null : ssex.trim();
+    public void setStudentPassword(String studentPassword) {
+        this.studentPassword = studentPassword == null ? null : studentPassword.trim();
     }
 
-    public String getSschool() {
-        return sschool;
+    public Integer getStudentAge() {
+        return studentAge;
     }
 
-    public void setSschool(String sschool) {
-        this.sschool = sschool == null ? null : sschool.trim();
+    public void setStudentAge(Integer studentAge) {
+        this.studentAge = studentAge;
     }
 
-    public String getSpassword() {
-        return spassword;
+    public String getStudentSex() {
+        return studentSex;
     }
 
-    public void setSpassword(String spassword) {
-        this.spassword = spassword == null ? null : spassword.trim();
+    public void setStudentSex(String studentSex) {
+        this.studentSex = studentSex == null ? null : studentSex.trim();
     }
 
-    public Integer getRid() {
-        return rid;
+    public String getStudentPicture() {
+        return studentPicture;
     }
 
-    public void setRid(Integer rid) {
-        this.rid = rid;
+    public void setStudentPicture(String studentPicture) {
+        this.studentPicture = studentPicture == null ? null : studentPicture.trim();
     }
 
-    public String getSpic() {
-        return spic;
+    public String getStudentProfession() {
+        return studentProfession;
     }
 
-    public void setSpic(String spic) {
-        this.spic = spic == null ? null : spic.trim();
+    public void setStudentProfession(String studentProfession) {
+        this.studentProfession = studentProfession == null ? null : studentProfession.trim();
     }
 
     public Integer getClassId() {
@@ -93,11 +93,11 @@ public class Student {
         this.classId = classId;
     }
 
-    public String getProfession() {
-        return profession;
+    public String getStudentSchool() {
+        return studentSchool;
     }
 
-    public void setProfession(String profession) {
-        this.profession = profession == null ? null : profession.trim();
+    public void setStudentSchool(String studentSchool) {
+        this.studentSchool = studentSchool == null ? null : studentSchool.trim();
     }
 }

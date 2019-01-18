@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.Utils.Md5Utils;
 import com.example.demo.model.Admin;
 import com.example.demo.service.AdminService;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
+
 
 /**
  * @author wangxl
@@ -22,15 +25,15 @@ public class AdminController {
     @Resource
     private AdminService adminService;
 
-    @RequestMapping("checkAdmin")
+
+//    管理员登录 ok
+    @PostMapping("checkAdmin")
     public Boolean checkAdminLogin(HttpServletRequest request){
         String aname = request.getParameter("username");
         String apassword = request.getParameter("password");
 
-        if(Md5Utils.getSaltverifyMD5(apassword,adminService.getPassword(aname))){
-            Admin admin = new Admin();
-            admin.setAname(aname);
-            Admin admin1 = adminService.checkAdminLogin(admin);
+        if(Md5Utils.getSaltverifyMD5(apassword,adminService.checkAdminLogin(aname).getAdminPassword())){
+            Admin admin1 = adminService.checkAdminLogin(aname);
             request.getSession().setAttribute("adminsession", admin1);
             return true;
         }else{
@@ -38,7 +41,7 @@ public class AdminController {
         }
     }
 
-
+//    获得管理员的session
     @PostMapping("getAdminSession")
     public Admin getAdminSession(HttpServletRequest request){
         String key = request.getParameter("adminBean");
@@ -46,7 +49,7 @@ public class AdminController {
         return admin;
     }
 
-
+//    退出登录
     @GetMapping("loginOut")
     public int removeSession(HttpServletRequest request){
         HttpSession session = request.getSession(false);
@@ -61,15 +64,20 @@ public class AdminController {
         }
     }
 
-
+//    管理员注册 ok
     @PostMapping("insertAdmin")
     public int insertAdmin(HttpServletRequest request){
         String name = request.getParameter("name");
         String password = request.getParameter("password");
         String strmd5 = Md5Utils.getSaltMD5(password);
         Admin admin = new Admin();
-        admin.setAname(name);
-        admin.setApassword(strmd5);
+        admin.setAdminName(name);
+        admin.setAdminPassword(strmd5);
         return adminService.insertAdmin(admin);
+    }
+
+    @GetMapping("getAllAdmin")
+    public List<Admin> getAllAdmin(){
+        return adminService.getAllAdmin();
     }
 }

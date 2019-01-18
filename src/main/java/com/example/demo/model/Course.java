@@ -1,85 +1,75 @@
 package com.example.demo.model;
 
-import java.util.Date;
-
 public class Course {
-    private Integer cid;
+    private Integer courseId;
 
-    private String cname;
+    private String courseName;
 
-    private String cpicture;
+    private String coursePicture;
 
-    private Date createtime;
+    private String courseVideo;
 
-    private Integer tid;
+    private String coursePingfen;
 
-    private String cintroduce;
+    private Integer teacherId;
 
-    private Integer cpingfen;
-
-    private String cvideo;
-
-    public Integer getCid() {
-        return cid;
+    public Integer getTeacherId() {
+        return teacherId;
     }
 
-    public void setCid(Integer cid) {
-        this.cid = cid;
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
     }
 
-    public String getCname() {
-        return cname;
+    private String courseIntroduce;
+
+    public Integer getCourseId() {
+        return courseId;
     }
 
-    public void setCname(String cname) {
-        this.cname = cname == null ? null : cname.trim();
+    public void setCourseId(Integer courseId) {
+        this.courseId = courseId;
     }
 
-    public String getCpicture() {
-        return cpicture;
+    public String getCourseName() {
+        return courseName;
     }
 
-    public void setCpicture(String cpicture) {
-        this.cpicture = cpicture == null ? null : cpicture.trim();
+    public void setCourseName(String courseName) {
+        this.courseName = courseName == null ? null : courseName.trim();
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public String getCoursePicture() {
+        return coursePicture;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCoursePicture(String coursePicture) {
+        this.coursePicture = coursePicture == null ? null : coursePicture.trim();
     }
 
-    public Integer getTid() {
-        return tid;
+    public String getCourseVideo() {
+        return courseVideo;
     }
 
-    public void setTid(Integer tid) {
-        this.tid = tid;
+    public void setCourseVideo(String courseVideo) {
+        this.courseVideo = courseVideo == null ? null : courseVideo.trim();
     }
 
-    public String getCintroduce() {
-        return cintroduce;
+    public String getCoursePingfen() {
+        return coursePingfen;
     }
 
-    public void setCintroduce(String cintroduce) {
-        this.cintroduce = cintroduce == null ? null : cintroduce.trim();
+    public void setCoursePingfen(String coursePingfen) {
+        this.coursePingfen = coursePingfen == null ? null : coursePingfen.trim();
     }
 
-    public Integer getCpingfen() {
-        return cpingfen;
+
+
+    public String getCourseIntroduce() {
+        return courseIntroduce;
     }
 
-    public void setCpingfen(Integer cpingfen) {
-        this.cpingfen = cpingfen;
-    }
-
-    public String getCvideo() {
-        return cvideo;
-    }
-
-    public void setCvideo(String cvideo) {
-        this.cvideo = cvideo == null ? null : cvideo.trim();
+    public void setCourseIntroduce(String courseIntroduce) {
+        this.courseIntroduce = courseIntroduce == null ? null : courseIntroduce.trim();
     }
 }

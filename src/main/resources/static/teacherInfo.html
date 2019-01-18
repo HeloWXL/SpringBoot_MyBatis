@@ -27,7 +27,60 @@
         #t-student{
             width: 765px;
         }
+        #t-listnotice{
+            width: 765px;
+        }
+        div {
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+            margin: 0 auto;
+        }
+
+        h3 {
+            text-align: center
+        }
+
+        #container {
+            width: 500px;
+            margin-right: 200px;
+        }
+
+        .article {
+            border: 1px solid #a6cbe7;
+            margin-top: 5px;
+        }
+
+        .author {
+            background-color: #0099FF;
+            width: 100%;
+            height: 24px;
+            line-height: 24px;
+        }
+
+        .content {
+            height: 40px;
+            padding: 10px;
+        }
+
+        .author span {
+            float: right;
+            padding-right: 10px;
+        }
+
+        .time {
+            border-top: solid 1px #a6cbe7;
+        }
+
+        .page {
+            text-align: right;
+            height: 30px;
+            line-height: 30px;
+            padding-right: 10px;
+        }
     </style>
+    <script src="layer/layer.js"></script>
+    <link rel="stylesheet" href="layer/mobile/need/layer.css">
 </head>
 <body>
 <div class="container">
@@ -51,7 +104,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
+                <div class="panel panel-info">
                     <div class="panel-heading">
                         <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-483343" href="#panel-element-297026">学生信息</a>
                     </div>
@@ -61,7 +114,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
+                <div class="panel panel-warning">
                     <div class="panel-heading">
                         <a class="panel-title" data-toggle="collapse" data-parent="#panel-721853" href="#panel-element-555328">考试相关</a>
                     </div>
@@ -71,7 +124,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
+                <div class="panel panel-info">
                     <div class="panel-heading">
                         <a class="panel-title" data-toggle="collapse" data-parent="#panel-721853" href="#panel-element-228269">学生成绩</a>
                     </div>
@@ -81,13 +134,27 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
+                <div class="panel panel-danger">
                     <div class="panel-heading">
                         <a class="panel-title" data-toggle="collapse" data-parent="#panel-721853" href="#panel-element-66666">试题管理</a>
                     </div>
                     <div id="panel-element-66666" class="panel-collapse collapse">
                         <div class="panel-body" id="add">
                             添加试题
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <a class="panel-title" data-toggle="collapse" data-parent="#panel-721853" href="#panel-element-88888">公告管理</a>
+                    </div>
+                    <div id="panel-element-88888" class="panel-collapse collapse">
+                        <div class="panel-body" id="notices">
+                            发布公告
+                        </div>
+                        <div class="panel-body" id="listnotice">
+                            查看公告信息
                         </div>
                     </div>
 
@@ -262,6 +329,61 @@
                     </tbody>
                 </table>
             </div>
+            <div id="t-notice" style="display: none">
+                <form class="bs-example bs-example-form" role="form" id="form">
+                    <p>公告标题:</p>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="title">
+                    </div>
+                    <p>公告内容:</p>
+                    <div class="input-group">
+                        <div class="panel panel-default" id="news">
+                        <textarea style="width: 400px;height: 400px;" id="contents">
+
+                        </textarea>
+                        </div>
+                    </div>
+                </form>
+                <div id="button">
+                    <button type="button" class="btn btn-default" name="submit">发布</button>
+                </div>
+            </div>
+            <div id="t-listnotice" style="display: none">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            公告ID
+                        </th>
+                        <th>
+                            公告标题
+                        </th>
+                        <th>
+                            公告内容
+                        </th>
+                        <th>
+                            公告发布时间
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            TB - Monthly
+                        </td>
+                        <td>
+                            01/04/2012
+                        </td>
+                        <td>
+                            Default
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="col-md-4 column">
             <div id="t-info">
@@ -291,6 +413,32 @@
             </div>
         </div>
     </div>
+    <div id="container">
+        <div><h3>留言板</h3></div>
+        <div>
+            <div class="article">
+                <div class="author">用户:张三<span>10#</span></div>
+                <div class="content">测试一下</div>
+                <div class="time page">发表于:2016-02-09 13:12:23</div>
+            </div>
+        </div>
+
+        <div class="page">
+            <input class="btn1" type="button" value="上一页" onClick="">
+            <input class="btn1" type="button" value="下一页" onClick="">
+        </div><br>
+        <div>
+            <form action="doPost.jsp" method="post">
+                <div>
+                    用户: <input type="text" name="author" value=""/>
+                </div><br>
+                <div>
+                    留言: <textarea name="message" rows="5" cols="72"></textarea>
+                </div>
+                <div align="center"><input type="reset" value="清除"/> <input type="submit" value="发表"/></div>
+            </form>
+        </div>
+    </div>
 </div>
 </body>
 <script>
@@ -306,7 +454,6 @@
             data:{"teacherBean":"teacherSession"},
             type:'post',
             success:function (ret) {
-                console.log(ret)
                 tid = ret.tid;
                 $("#t-info img").attr("src",ret.timg)
                 // 教师姓名
@@ -319,13 +466,89 @@
                 $("#t-info span:nth-child(8)").html(ret.tmajor);
             }
         })
-        
+
+        // 查看发布的公告
+        $("#listnotice").click(function () {
+            $("#t-course").hide();
+            $("#t-score").hide();
+            $("#t-notice").hide();
+            $("#t-student").hide();
+            $("#t-test").hide();
+            $("#t-listnotice").show();
+            $("#t-listnotice tbody").empty();
+            $.ajax({
+                url:'notice/selectnoticebyTid',
+                dataType:'json',
+                data:{"tid":tid},
+                type:"post",
+                success:function (ret) {
+                    console.log(ret)
+                    for(var i = 0;i <ret.length;i++){
+
+                        var content  = ret[i].noticeContent;
+
+                        var $node = $('<tr class="'+classArr[b++]+'">\n' +
+                            '                        <td>\n' +
+                            '                            '+ret[i].noticeId+'\n' +
+                            '                        </td>\n' +
+                            '                        <td>\n' +
+                            '                            '+ret[i].noticeTitle+'\n' +
+                            '                        </td>\n' +
+                            '                        <td>\n' +
+                            '                             '+content+'\n' +
+                            '                        </td>\n' +
+                            '                        <td>\n' +
+                            '                            '+ret[i].noticeTime+'\n' +
+                            '                        </td>\n' +
+                            '                    </tr>')
+                        $("#t-listnotice tbody").append($node)
+                    }
+
+                }
+            })
+        })
+
+        // 发布公告
+        $("#notices").click(function () {
+            $("#t-course").hide();
+            $("#t-score").hide();
+            $("#t-notice").show();
+            $("#t-student").hide();
+            $("#t-test").hide();
+            $("#t-listnotice").hide();
+
+            $("button[name='submit']").click(function () {
+                $.ajax({
+                    url:'notice/insertnotice',
+                    dataType:'json',
+                    data:{"title":$("#title").val(),
+                        "content":$("#contents").val(),
+                        "tid":tid},
+                    type:"post",
+                    success:function (ret) {
+                        if(ret==true){
+                            layer.msg("发布成功",{time:2000})
+                        }else{
+                            layer.msg("发布失败",{time:2000})
+                        }
+                    }
+                })
+            })
+            $("")
+
+
+
+        })
+
+
         // 我的课程
         $("#mycourse").click(function () {
             $("#t-course").show();
             $("#t-score").hide();
+            $("#t-notice").hide();
             $("#t-student").hide();
             $("#t-test").hide();
+            $("#t-listnotice").hide();
             $("#t-course tbody").empty();
             $.ajax({
                 url:'course/getCourseByTid',
@@ -365,8 +588,10 @@
         $("#mystudent").click(function () {
             $("#t-course").hide();
             $("#t-score").hide();
+            $("#t-notice").hide();
             $("#t-student").show();
             $("#t-test").hide();
+            $("#t-listnotice").hide();
             $("#t-student tbody").empty();
             $.ajax({
                 url:'teacher/getStudentAndCourse',
@@ -418,7 +643,10 @@
             $("#t-score").hide();
             $("#t-student").hide();
             $("#t-test").show();
+            $("#t-notice").hide();
+            $("#t-listnotice").hide();
         })
+
         $("#add").click(function () {
             location.href="addExams.html"
         })

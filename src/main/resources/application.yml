@@ -1,20 +1,8 @@
 #默认使用配置
-spring:
-  profiles:
-    active: dev
-
-#公共配置与profiles选择无关
-mybatis:
-  typeAliasesPackage: com.example.demo.model
-  mapperLocations: classpath:mapping/*.xml
-server:
-  port: 8888
-
----
-
 #开发配置
 spring:
-  profiles: dev
+  profiles:
+      active: dev
   datasource:
     url: jdbc:mysql://localhost:3306/database
     username: root
@@ -22,4 +10,15 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
   thymeleaf:
-    prefix: classpath:/templates
+    prefix: classpath:/templates/,classpath:/static/
+    mode: LEGACYHTML5
+
+
+#公共配置与profiles选择无关
+mybatis:
+  typeAliasesPackage: com.example.demo.model
+  mapperLocations: classpath:mapping/*.xml
+
+#服务器端口配置
+server:
+  port: 9999

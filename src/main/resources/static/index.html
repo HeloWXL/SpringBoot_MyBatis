@@ -116,6 +116,8 @@
     </ul>
 </div>
 
+
+
 <script src="js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="layui-v2.4.3/layui/layui.js" type="application/javascript"></script>
 
@@ -138,7 +140,7 @@
                     $('#user1').show();
                     $('#select').show();
                     $('.login').hide();
-                    $node = $('<img src="//t.cn/RCzsdCq" class="layui-nav-img"><span>'+ret.sname+'</span>');
+                    $node = $('<img src="//t.cn/RCzsdCq" class="layui-nav-img"><span>'+ret.studentName+'</span>');
                     $("#user1").html($node);
                 }
             }
@@ -150,14 +152,15 @@
             dataType:'json',
             async:false,
             success:function (ret) {
+                console.log(ret)
                 if($.isEmptyObject(ret)){
                     console.log("获取课程列表失败");
                 }else{
                     for(var i = 0;i<ret.length;i++){
-                        var image = ret[i].cpicture;
-                        var name = ret[i].cname;
-                        var tid = ret[i].tid;
-                        var pingfen = ret[i].cpingfen;
+                        var image = ret[i].coursePicture;
+                        var name = ret[i].courseName;
+                        var tid = ret[i].teacherId;
+                        var pingfen = ret[i].coursePingfen;
 
                         $node = $('<li>\n' +
                             '            <div class="course-list">\n' +
@@ -185,11 +188,10 @@
                 data:{"tid":tid},
                 async:false,
                 success:function (ret) {
-                   tname = ret.tname;
+                   tname = ret.teacherName;
                 }
             })
             return  tname;
-
         }
     })
 </script>

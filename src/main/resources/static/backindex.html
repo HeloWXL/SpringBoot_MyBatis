@@ -75,6 +75,7 @@
                 $("#static").hide();
                 $("#course").hide();
                 $("#score").hide();
+                $("#addmin").hide();
             })
             // 点击学生管理 触发事件 将教师、课程、成绩、统计分析等窗口进行隐藏
             $("a[name='student']").click(function () {
@@ -87,6 +88,7 @@
                 $("#course").hide();
                 $("#score").hide();
                 $("#index").hide();
+                $("#addmin").hide();
                 $("#student table tbody").empty();
                 $.ajax({
                     url: "student/getStudent",
@@ -239,6 +241,7 @@
                 $("#course").hide();
                 $("#score").hide();
                 $("#index").hide();
+                $("#addmin").hide();
                 // 先将教师列表进行清空
                 $("#teacher table tbody").empty();
                 //加载教师信息
@@ -372,7 +375,6 @@
                     })
                 });
             })
-
             $("a[name='static']").click(function () {
                 $("#static").show();
                 $("#student").hide();
@@ -380,6 +382,7 @@
                 $("#course").hide();
                 $("#score").hide();
                 $("#index").hide();
+                $("#addmin").hide();
             })
             $("a[name='course']").click(function () {
                 $("#course").show();
@@ -388,6 +391,7 @@
                 $("#teacher").hide();
                 $("#static").hide();
                 $("#index").hide();
+                $("#addmin").hide();
                 var pageNo=2;
                 var pageSize =10;
                 var pageCount =0;
@@ -404,27 +408,27 @@
                     success: function (ret) {
                         pageCount = ret.count;
                         for (var i = 0; i < ret.list.length; i++) {
-                            if(ret.list[i].cpicture.endWith(s)){
-                                image = ret.list[i].cpicture;
+                            if(ret.list[i].coursePicture.endWith(s)){
+                                image = ret.list[i].coursePicture;
                             }
                             $node = $("<tr class=\"" + classArr[a++] + "\">\n" +
                                 "                                <td>\n" +
-                                "                                    " + ret.list[i].cid + "\n" +
+                                "                                    " + ret.list[i].courseId + "\n" +
                                 "                                </td>\n" +
                                 "                                <td>\n" +
                                 "                                    <img src="+image+" width=\"50px\">\n" +
                                 "                                </td>\n" +
                                 "                                <td>\n" +
-                                "                                    " + ret.list[i].cname + "\n" +
+                                "                                    " + ret.list[i].courseName + "\n" +
                                 "                                </td>\n" +
                                 "                                <td>\n" +
-                                "                                    " + ret.list[i].tcpingfen + "" +
+                                "                                    " + ret.list[i].coursecpingfen + "" +
                                 "                                </td>\n" +
                                 "                                <td>\n" +
-                                "                                    " + ret.list[i].cintroduce + "" +
+                                "                                    " + ret.list[i].courseIntroduce + "" +
                                 "                                </td>\n" +
                                 "                                <td>\n" +
-                                "                                    " + ret.list[i].cvideo + "" +
+                                "                                    " + ret.list[i].courseVideo + "" +
                                 "                                </td>\n" +
                                 "                            </tr>")
                             $("#course table tbody").append($node);
@@ -544,8 +548,34 @@
                 $("#course").hide();
                 $("#static").hide();
                 $("#index").hide();
+                $("#addmin").hide();
             })
+            $("a[name='addadmin']").click(function () {
+                $("#addmin").show();
+                $("#score").hide();
+                $("#student").hide();
+                $("#teacher").hide();
+                $("#course").hide();
+                $("#static").hide();
+                $("#index").hide();
+                $(".btn").click(function () {
+                    $.ajax({
+                        url:'admin/insertAdmin',
+                        dataType:'json',
+                        data:{"name":$("input[name='aname']").val(),"password":$("input[name='password']").val()},
+                        type:'post',
+                        success:function (ret) {
+                            if(ret==1){
+                                layer.msg("添加成功",{time:2000});
+                            }else{
+                                layer.msg("添加失败",{time:2000})
+                            }
+                        }
 
+                    })
+                })
+
+            })
             var math;
             var chinese;
             var english;
@@ -572,9 +602,6 @@
 
                 }
             })
-
-
-
         })
         function math_echarts(math) {
             var chart3 = echarts.init(document.getElementById("chart3"));
@@ -874,11 +901,11 @@
     <style>
         #nav{
             margin-top: 50px;
-            width: 120px;
+            width: 130px;
             height: 100%;
         }
         #content{
-            width: 960px;
+            width: 954px;
             margin-left: 0px;
             height: 100%;
         }
@@ -925,7 +952,7 @@
             margin-left: -25px;
         }
         #admin{
-            width: 90px;
+            width: 86px;
             height: 150px;
             margin-top: 50px;
         }
@@ -940,6 +967,13 @@
         }
         #admin a{
             text-decoration: none;
+        }
+        #addmin{
+            margin-left: 100px;
+            margin-top: 100px;
+        }
+        .form-horizontal{
+            width: 200px;
         }
 
     </style>
@@ -965,6 +999,9 @@
                         <li><a href="#" name="score">成绩管理</a></li>
                         <li class="dropdown">
                             <a href="#" name="static">统计分析</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" name="addadmin">添加管理员</a>
                         </li>
                     </ul>
                 </div>
@@ -1224,6 +1261,28 @@
                         <div id="chart3" class="echarts"  style="border: 1px solid #000; width:400px;height:400px;float: left;"></div>
                         <div id="chart4"class="echarts"  style="border: 1px solid #000;width:400px;height:400px;float: left;"></div>
                         <div id="chart5" class="echarts" style="border: 1px solid #000;width:400px;height:400px;float: left;"></div>
+                    </div>
+
+                    <div id="addmin" style="display: none">
+                        <form class="form-horizontal">
+                            <div class="control-group">
+                                <label class="control-label">管理员名称</label>
+                                <div class="controls">
+                                    <input type="text" class="form-control" name="aname" placeholder="请输入管理员名称" width="30px">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">管理员密码</label>
+                                <div class="controls">
+                                    <input type="password" class="form-control" placeholder="请管理员密码" width="30px">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                     <button type="button" class="btn">注册</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

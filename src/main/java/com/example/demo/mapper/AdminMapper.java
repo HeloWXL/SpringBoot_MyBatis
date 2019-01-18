@@ -4,26 +4,28 @@ import com.example.demo.model.Admin;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 public interface AdminMapper {
-    int deleteByPrimaryKey(Integer aid);
+    int deleteByPrimaryKey(Integer adminId);
 
     int insert(Admin record);
 
     int insertSelective(Admin record);
 
-    Admin selectByPrimaryKey(Integer aid);
+    Admin selectByPrimaryKey(Integer adminId);
 
     int updateByPrimaryKeySelective(Admin record);
 
     int updateByPrimaryKey(Admin record);
 
-    @Select("select * from admin where aname = #{aname}")
-    Admin checkAdminLogin(Admin admin);
 
-    @Select("select apassword from admin where aname = #{aname}")
-    String getPassword(String aname);
+    Admin checkAdminLogin(String adminName);
 
-    @Insert("insert into admin (aname,apassword) values (#{aname},#{apassword})")
+    @Insert("insert into admin (admin_name,admin_password) values (#{adminName},#{adminPassword})")
     int insertAdmin(Admin admin);
+
+//    <!--查询所有的管理员-->
+    List<Admin> selectAllAdmin();
 
 }

@@ -2,151 +2,182 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.demo.mapper.StudentMapper" >
   <resultMap id="BaseResultMap" type="com.example.demo.model.Student" >
-    <id column="sid" property="sid" jdbcType="INTEGER" />
-    <result column="sname" property="sname" jdbcType="VARCHAR" />
-    <result column="sage" property="sage" jdbcType="INTEGER" />
-    <result column="ssex" property="ssex" jdbcType="VARCHAR" />
-    <result column="sschool" property="sschool" jdbcType="VARCHAR" />
-    <result column="spassword" property="spassword" jdbcType="VARCHAR" />
-    <result column="rid" property="rid" jdbcType="INTEGER" />
-    <result column="spic" property="spic" jdbcType="VARCHAR" />
+    <id column="student_id" property="studentId" jdbcType="INTEGER" />
+    <result column="student_sno" property="studentSno" jdbcType="INTEGER" />
+    <result column="student_name" property="studentName" jdbcType="VARCHAR" />
+    <result column="student_password" property="studentPassword" jdbcType="VARCHAR" />
+    <result column="student_age" property="studentAge" jdbcType="INTEGER" />
+    <result column="student_sex" property="studentSex" jdbcType="VARCHAR" />
+    <result column="student_picture" property="studentPicture" jdbcType="VARCHAR" />
+    <result column="student_profession" property="studentProfession" jdbcType="VARCHAR" />
     <result column="class_id" property="classId" jdbcType="INTEGER" />
-    <result column="profession" property="profession" jdbcType="VARCHAR" />
+    <result column="student_school" property="studentSchool" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    sid, sname, sage, ssex, sschool, spassword, rid, spic, class_id, profession
+    student_id, student_sno, student_name, student_password, student_age, student_sex, 
+    student_picture, student_profession, class_id, student_school
   </sql>
+
+
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from student
-    where sid = #{sid,jdbcType=INTEGER}
+    where student_id = #{studentId,jdbcType=INTEGER}
   </select>
+
+  <select id="checkLogin" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from student
+   where student_name =#{studentName,jdbcType=VARCHAR}
+  </select>
+
+  <!--获得所有学生 分页显示-->
+  <select id="getAlLStudent" resultMap="BaseResultMap" parameterType="com.example.demo.controller.vo.Page" >
+    select
+    <include refid="Base_Column_List" />
+    from student
+    limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from student
-    where sid = #{sid,jdbcType=INTEGER}
+    where student_id = #{studentId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.demo.model.Student" >
-    insert into student (sid, sname, sage, 
-      ssex, sschool, spassword, 
-      rid, spic, class_id, 
-      profession)
-    values (#{sid,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, #{sage,jdbcType=INTEGER}, 
-      #{ssex,jdbcType=VARCHAR}, #{sschool,jdbcType=VARCHAR}, #{spassword,jdbcType=VARCHAR}, 
-      #{rid,jdbcType=INTEGER}, #{spic,jdbcType=VARCHAR}, #{classId,jdbcType=INTEGER}, 
-      #{profession,jdbcType=VARCHAR})
+    insert into student (student_id, student_sno, student_name, 
+      student_password, student_age, student_sex, 
+      student_picture, student_profession, class_id, 
+      student_school)
+    values (#{studentId,jdbcType=INTEGER}, #{studentSno,jdbcType=INTEGER}, #{studentName,jdbcType=VARCHAR}, 
+      #{studentPassword,jdbcType=VARCHAR}, #{studentAge,jdbcType=INTEGER}, #{studentSex,jdbcType=VARCHAR}, 
+      #{studentPicture,jdbcType=VARCHAR}, #{studentProfession,jdbcType=VARCHAR}, #{classId,jdbcType=INTEGER}, 
+      #{studentSchool,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.model.Student" >
     insert into student
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="sid != null" >
-        sid,
+      <if test="studentId != null" >
+        student_id,
       </if>
-      <if test="sname != null" >
-        sname,
+      <if test="studentSno != null" >
+        student_sno,
       </if>
-      <if test="sage != null" >
-        sage,
+      <if test="studentName != null" >
+        student_name,
       </if>
-      <if test="ssex != null" >
-        ssex,
+      <if test="studentPassword != null" >
+        student_password,
       </if>
-      <if test="sschool != null" >
-        sschool,
+      <if test="studentAge != null" >
+        student_age,
       </if>
-      <if test="spassword != null" >
-        spassword,
+      <if test="studentSex != null" >
+        student_sex,
       </if>
-      <if test="rid != null" >
-        rid,
+      <if test="studentPicture != null" >
+        student_picture,
       </if>
-      <if test="spic != null" >
-        spic,
+      <if test="studentProfession != null" >
+        student_profession,
       </if>
       <if test="classId != null" >
         class_id,
       </if>
-      <if test="profession != null" >
-        profession,
+      <if test="studentSchool != null" >
+        student_school,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="sid != null" >
-        #{sid,jdbcType=INTEGER},
+      <if test="studentId != null" >
+        #{studentId,jdbcType=INTEGER},
       </if>
-      <if test="sname != null" >
-        #{sname,jdbcType=VARCHAR},
+      <if test="studentSno != null" >
+        #{studentSno,jdbcType=INTEGER},
       </if>
-      <if test="sage != null" >
-        #{sage,jdbcType=INTEGER},
+      <if test="studentName != null" >
+        #{studentName,jdbcType=VARCHAR},
       </if>
-      <if test="ssex != null" >
-        #{ssex,jdbcType=VARCHAR},
+      <if test="studentPassword != null" >
+        #{studentPassword,jdbcType=VARCHAR},
       </if>
-      <if test="sschool != null" >
-        #{sschool,jdbcType=VARCHAR},
+      <if test="studentAge != null" >
+        #{studentAge,jdbcType=INTEGER},
       </if>
-      <if test="spassword != null" >
-        #{spassword,jdbcType=VARCHAR},
+      <if test="studentSex != null" >
+        #{studentSex,jdbcType=VARCHAR},
       </if>
-      <if test="rid != null" >
-        #{rid,jdbcType=INTEGER},
+      <if test="studentPicture != null" >
+        #{studentPicture,jdbcType=VARCHAR},
       </if>
-      <if test="spic != null" >
-        #{spic,jdbcType=VARCHAR},
+      <if test="studentProfession != null" >
+        #{studentProfession,jdbcType=VARCHAR},
       </if>
       <if test="classId != null" >
         #{classId,jdbcType=INTEGER},
       </if>
-      <if test="profession != null" >
-        #{profession,jdbcType=VARCHAR},
+      <if test="studentSchool != null" >
+        #{studentSchool,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.Student" >
     update student
     <set >
-      <if test="sname != null" >
-        sname = #{sname,jdbcType=VARCHAR},
+      <if test="studentSno != null" >
+        student_sno = #{studentSno,jdbcType=INTEGER},
       </if>
-      <if test="sage != null" >
-        sage = #{sage,jdbcType=INTEGER},
+      <if test="studentName != null" >
+        student_name = #{studentName,jdbcType=VARCHAR},
       </if>
-      <if test="ssex != null" >
-        ssex = #{ssex,jdbcType=VARCHAR},
+      <if test="studentPassword != null" >
+        student_password = #{studentPassword,jdbcType=VARCHAR},
       </if>
-      <if test="sschool != null" >
-        sschool = #{sschool,jdbcType=VARCHAR},
+      <if test="studentAge != null" >
+        student_age = #{studentAge,jdbcType=INTEGER},
       </if>
-      <if test="spassword != null" >
-        spassword = #{spassword,jdbcType=VARCHAR},
+      <if test="studentSex != null" >
+        student_sex = #{studentSex,jdbcType=VARCHAR},
       </if>
-      <if test="rid != null" >
-        rid = #{rid,jdbcType=INTEGER},
+      <if test="studentPicture != null" >
+        student_picture = #{studentPicture,jdbcType=VARCHAR},
       </if>
-      <if test="spic != null" >
-        spic = #{spic,jdbcType=VARCHAR},
+      <if test="studentProfession != null" >
+        student_profession = #{studentProfession,jdbcType=VARCHAR},
       </if>
       <if test="classId != null" >
         class_id = #{classId,jdbcType=INTEGER},
       </if>
-      <if test="profession != null" >
-        profession = #{profession,jdbcType=VARCHAR},
+      <if test="studentSchool != null" >
+        student_school = #{studentSchool,jdbcType=VARCHAR},
       </if>
     </set>
-    where sid = #{sid,jdbcType=INTEGER}
+    where student_id = #{studentId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.demo.model.Student" >
     update student
-    set sname = #{sname,jdbcType=VARCHAR},
-      sage = #{sage,jdbcType=INTEGER},
-      ssex = #{ssex,jdbcType=VARCHAR},
-      sschool = #{sschool,jdbcType=VARCHAR},
-      spassword = #{spassword,jdbcType=VARCHAR},
-      rid = #{rid,jdbcType=INTEGER},
-      spic = #{spic,jdbcType=VARCHAR},
+    set student_sno = #{studentSno,jdbcType=INTEGER},
+      student_name = #{studentName,jdbcType=VARCHAR},
+      student_password = #{studentPassword,jdbcType=VARCHAR},
+      student_age = #{studentAge,jdbcType=INTEGER},
+      student_sex = #{studentSex,jdbcType=VARCHAR},
+      student_picture = #{studentPicture,jdbcType=VARCHAR},
+      student_profession = #{studentProfession,jdbcType=VARCHAR},
       class_id = #{classId,jdbcType=INTEGER},
-      profession = #{profession,jdbcType=VARCHAR}
-    where sid = #{sid,jdbcType=INTEGER}
+      student_school = #{studentSchool,jdbcType=VARCHAR}
+    where student_id = #{studentId,jdbcType=INTEGER}
   </update>
 </mapper>

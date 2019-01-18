@@ -2,24 +2,17 @@ package com.example.demo.controller;
 
 import com.example.demo.controller.vo.Page;
 import com.example.demo.model.Course;
-import com.example.demo.model.Student;
 import com.example.demo.model.Teacher;
 import com.example.demo.service.CourseService;
-import net.sf.json.JSON;
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import org.springframework.http.HttpRequest;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +28,7 @@ public class CourseController {
     private CourseService courseService;
 //    老师添加一门课程
     @PostMapping("insertCouseByTid")
-    public JSONObject insertCourseByTid(HttpServletRequest request){
+    public JSONObject insertCourseByTid(HttpServletRequest request) {
         String cname = request.getParameter("cname");
         String cpicture = request.getParameter("cpic");
         String cintroduce = request.getParameter("cintroduce");
@@ -43,25 +36,18 @@ public class CourseController {
 
         Teacher teacher = (Teacher) request.getSession().getAttribute("teacherSession");
         Course course = new Course();
-        course.setCname(cname);
-        course.setCpicture(cpicture);
-        course.setCintroduce(cintroduce);
-        course.setCvideo(cvideo);
-        int i = courseService.InsertIntoCourseByTid(course,teacher);
+        course.setCourseName(cname);
+        course.setCoursePicture(cpicture);
+        course.setCourseIntroduce(cintroduce);
+        course.setCourseVideo(cvideo);
+        int i = courseService.InsertIntoCourseByTid(course, teacher);
         JSONObject jsonObject = JSONObject.fromObject(i);
         return jsonObject;
+    }
 
-    }
-//    删除一门课程By课程ID
-    @PostMapping("deleteCourseByCid")
-    public JSONObject deleteCourseByCid(HttpServletRequest request){
-        String cid = request.getParameter("cid");
-        JSONObject jsonObject = JSONObject.fromObject(courseService.deleteByCid(Integer.parseInt(cid)));
-        return jsonObject;
-    }
 //    获得所有的课程  列表
-    @PostMapping("getAllCourseList")
-    public JSONObject getAllCourseList(HttpServletRequest request){
+    @PostMapping("getAllCourseLists")
+    public  Map<String,Object> getAllCourseList(HttpServletRequest request){
         String pageNo= request.getParameter("pageNo");
         String pageSize = request.getParameter("pageSize");
         Page page = new Page();
@@ -72,8 +58,8 @@ public class CourseController {
         Map<String,Object> map = new HashMap<>();
         map.put("list",courseList);
         map.put("count",courseService.getCourseCount());
-        JSONObject jsonObject = JSONObject.fromObject(map);
-        return jsonObject;
+
+        return map;
     }
 //    通过教师的id查询课程
     @PostMapping("getCourseByTid")
@@ -92,5 +78,48 @@ public class CourseController {
     public List<Course> getAllCourse(){
         return courseService.getAllCourse();
     }
+
+
+    @PostMapping("selectByCid")
+    public Boolean selectByCid(HttpServletRequest request){
+        String cid =request.getParameter("cid");
+        Course course= courseService.selectByCid(Integer.parseInt(cid));
+        request.getSession().setAttribute("cvideoSession",course.getCourseVideo());
+        if(StringUtils.isNotEmpty(course.getCourseVideo())){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @GetMapping("getcvideoSession")
+    public Map<String,String> GetCvideo(HttpServletRequest request){
+        String key = request.getParameter("getcvideo");
+        String cvideo = (String) request.getSession().getAttribute(key);
+        Map<String,String> map = new HashMap<>();
+        map.put("cvideo",cvideo);
+        return map;
+    }
+
+
+    @GetMapping("updateCoursePingfen")
+    public Boolean UpdateCoursePingfen(HttpServletRequest request){
+        String cid = request.getParameter("cid");
+        String pingfen = request.getParameter("pingfen");
+        int i = courseService.updateCoursePingfen(Integer.parseInt(cid),Integer.parseInt(pingfen));
+        if(i==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    @PostMapping("pushMessage")
+    public List<Course> pushSendMessage(HttpServletRequest request){
+        String c = request.getParameter("cname");
+        return courseService.sendMessage(c);
+    }
+
 }
 

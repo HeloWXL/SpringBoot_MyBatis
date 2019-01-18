@@ -19,24 +19,31 @@ public class TeacherService {
     private TeacherMapper teacherMapper;
 
 //    教师注册 添加一名教师
-    public int insertTreacher(Teacher teacher){
-        return teacherMapper.insertSelective(teacher);
+    public int insertTeacher(Teacher teacher){
+        return teacherMapper.insertIntoTeacher(teacher);
     }
+
 
 //    显示出所有的教师
     public List<Teacher> selectAllTeacher(Page page){
-        return teacherMapper.getAlLTeacher(page);
+        return teacherMapper.selectAllTeacher(page);
     }
+
+
 
     //删除教师
     public int deleteTeacher(Integer tid){
         return teacherMapper.deleteByPrimaryKey(tid);
     }
 
+
+
     //教师登录检查
     public Teacher checkLogin(Teacher teacher){
         return teacherMapper.checkLogin(teacher);
     }
+
+
 
 //    更新教师信息 获取教师的ID 根据ID更新教师的信息
     public int updateTeahcer(Teacher teacher){
@@ -59,8 +66,11 @@ public class TeacherService {
     }
 
 
+
+//    根據教師的姓名獲得教師的登陸密碼
     public String getPassword(String tname){
         return teacherMapper.getPassword(tname);
     }
+
 
 }
